@@ -6,6 +6,7 @@ name = "pypi"
 [scripts]
 dev = "uvicorn app.main:app"
 lint = "flake8 --max-line-length=100 --ignore=F401"
+tests = "pytest"
 
 [packages]
 fastapi = "==0.85.0"
@@ -13,6 +14,10 @@ uvicorn = {extras = ["standard"], version = "*"}
 
 [dev-packages]
 flake8 = "*"
+requests = "*"
+httpx = "*"
+pytest = "*"
+pytest-asyncio = "*"
 
 [requires]
 python_version = "3.9"
