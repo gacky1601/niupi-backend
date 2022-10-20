@@ -5,12 +5,14 @@ name = "pypi"
 
 [scripts]
 dev = "uvicorn app.main:app"
+lint = "flake8 --max-line-length=100 --ignore=F401"
 
 [packages]
 fastapi = "==0.85.0"
 uvicorn = {extras = ["standard"], version = "*"}
 
 [dev-packages]
+flake8 = "*"
 
 [requires]
 python_version = "3.9"
