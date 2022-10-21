@@ -16,7 +16,6 @@ uvicorn = {extras = ["standard"], version = "*"}
 flake8 = "*"
 requests = "*"
 pytest = "*"
-pytest-asyncio = "*"
 
 [requires]
 python_version = "3.9"
