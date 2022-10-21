@@ -36,8 +36,6 @@ jobs:
         pip install -r requirements.txt
         pip install requests
         pip install pytest
-        pip install pytest-asyncio
-        pip install httpx
 
     - name: Test with pytest
       env:
