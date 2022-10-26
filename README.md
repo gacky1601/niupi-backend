@@ -1,5 +1,10 @@
 # 牛啤購物後端
 
+## 開發規則與流程
+
+- [開發規則](https://github.com/gacky1601/niupi-backend/wiki/%E9%96%8B%E7%99%BC%E8%A6%8F%E5%89%87)
+- [開發流程](https://github.com/gacky1601/niupi-backend/wiki/%E9%96%8B%E7%99%BC%E6%B5%81%E7%A8%8B)
+
 ## 環境設定
 
 1. 請先安裝 [pipenv](https://github.com/pypa/pipenv#installation)
