@@ -12,6 +12,7 @@ tests = "pytest"
 fastapi = "==0.85.0"
 uvicorn = {extras = ["standard"], version = "*"}
 sqlalchemy = "*"
+psycopg2 = "*"
 
 [dev-packages]
 flake8 = "*"
