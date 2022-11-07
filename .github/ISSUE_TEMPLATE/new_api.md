@@ -11,6 +11,10 @@ assignees: ''
 
 
 
+# Method
+
+
+
 # Endpoint
 
 -  `/api/{feature}/{parameter}`
