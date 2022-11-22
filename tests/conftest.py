@@ -26,7 +26,6 @@ def clear_db():
         hashed_password="a",
         role_id=0
     )
-
     db.add(user)
 
     db.commit()
