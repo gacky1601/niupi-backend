@@ -8,13 +8,13 @@ def test_get_store_by_user_id(client: TestClient):
 
     assert response.status_code == 200
     assert response.json() == {
-        "id": "0df1dacb-67f6-495c-b993-49d06a293765",
-        "user_id": "0df1dacb-67f6-495c-b993-49d06a293766",
+        "id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
+        "user_id": "0df1dacb-67f6-495c-b993-49d06a293765",
         "name": "test",
         "address": "test",
         "email": "test@gmail.com",
         "cellphone_number": "0000000000",
-        "telephone_number": "0000000000",
+        "telephone_number": "0000000000"
     }
 
 
