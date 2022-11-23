@@ -131,3 +131,9 @@ def test_delete_user_by_id(client: TestClient):
     response = client.delete(f"/api/user/{user_id}")
 
     assert response.status_code == 204
+    response = client.get(f"/api/user/{user_id}")
+
+    assert response.status_code == 404
+    assert response.json() == {
+        "detail": "User not found"
+    }
