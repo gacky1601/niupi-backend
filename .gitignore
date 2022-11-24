@@ -8,4 +8,4 @@ __pycache__
 
 .vscode/*
 
-.python-version
+Pipfile.lock
