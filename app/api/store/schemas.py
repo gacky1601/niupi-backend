@@ -1,5 +1,5 @@
 from typing import Union
-from pydantic import BaseModel, EmailStr, UUID4, Field, constr
+from pydantic import BaseModel, EmailStr, UUID4, constr
 
 
 class Store(BaseModel):
@@ -7,7 +7,7 @@ class Store(BaseModel):
     user_id: UUID4
     name: Union[constr(min_length=1, strip_whitespace=True), None]
     address: Union[constr(min_length=1, strip_whitespace=True), None]
-    email: Union[constr(min_length=1, strip_whitespace=True), None]
+    email: Union[EmailStr, None]
     cellphone_number: Union[constr(min_length=1, strip_whitespace=True), None]
     telephone_number: Union[constr(min_length=1, strip_whitespace=True), None]
 

@@ -24,6 +24,6 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     address = Column(String)
     cellphone_number = Column(String)
-    store_id = Column(UUID(as_uuid=True))
     role_id = Column(Integer, ForeignKey("role.id"), nullable=False)
+    
     store = relationship("Store", back_populates="user", uselist=False)

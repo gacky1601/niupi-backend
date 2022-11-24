@@ -6,7 +6,6 @@ from .schemas import Store
 from .service import get_store_by_user_id
 from .dependencies import get_db
 from .exceptions import StoreNotFound
-from .exceptions import UserIdEmpty
 
 router = APIRouter()
 
@@ -15,8 +14,6 @@ router = APIRouter()
 def read_store(user_id: UUID4, db: Session = Depends(get_db)):
     store = get_store_by_user_id(db, user_id)
 
-    if user_id is None:
-        raise UserIdEmpty
     if store is None:
         raise StoreNotFound
 

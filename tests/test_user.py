@@ -9,11 +9,10 @@ def test_get_user_by_id(client: TestClient):
     assert response.status_code == 200
     assert response.json() == {
         "id": "0df1dacb-67f6-495c-b993-49d06a293765",
-        "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
         "email": "test@gmail.com",
         "username": "test",
-        "address": "test",
-        "cellphone_number": "0000000000",
+        "address": None,
+        "cellphone_number": None,
         "role_id": 0,
     }
 
