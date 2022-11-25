@@ -39,7 +39,6 @@ def clear_db():
         email="test@gmail.com",
         role_id=0
     )
-
     db.add(user)
     db.commit()
     db.close()
