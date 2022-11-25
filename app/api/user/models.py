@@ -26,4 +26,10 @@ class User(Base):
     cellphone_number = Column(String)
     role_id = Column(Integer, ForeignKey("role.id"), nullable=False)
 
-    store = relationship("Store", back_populates="user", uselist=False, cascade="all, delete", passive_deletes=True)
+    store = relationship(
+        "Store",
+        back_populates="user",
+        uselist=False,
+        cascade="all, delete",
+        passive_deletes=True
+    )
