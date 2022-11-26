@@ -9,8 +9,6 @@ class UserBase(BaseModel):
 
 class User(UserBase):
     id: UUID4
-    email: Union[constr(min_length=1, strip_whitespace=True), None]
-    username: Union[constr(min_length=1, strip_whitespace=True), None]
     address: Union[constr(min_length=1, strip_whitespace=True), None]
     cellphone_number: Union[constr(min_length=1, strip_whitespace=True), None]
     role_id: int = Field(ge=0, le=1)
