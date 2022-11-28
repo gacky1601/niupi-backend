@@ -17,9 +17,9 @@ def initialize_db():
 
     Base.metadata.create_all(bind=engine)
 
-    db = SessionLocal()
-
     if config.ENV == Environment.DEVELOPMENT:
+        db = SessionLocal()
+
         # initialize role table
         from .api.user.models import Role
 

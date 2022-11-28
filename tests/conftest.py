@@ -3,7 +3,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.database import engine, Base, SessionLocal
+from app.database import SessionLocal, initialize_db
 
 from app.api.store.models import Store
 from app.api.user.models import User
@@ -16,8 +16,10 @@ def client():
     return TestClient(app, base_url)
 
 
-@pytest.fixture(scope="session", autouse=True)
-def clear_db():
+@pytest.fixture(autouse=True)
+def reset_db():
+    initialize_db()
+
     db = SessionLocal()
 
     store = Store(
@@ -39,9 +41,8 @@ def clear_db():
         email="test@gmail.com",
         role_id=0
     )
+
     db.add(user)
+
     db.commit()
     db.close()
-
-    yield
-    Base.metadata.drop_all(engine)

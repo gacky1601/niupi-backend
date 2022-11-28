@@ -174,7 +174,7 @@ def test_sign_up(client: TestClient):
 
 def test_sign_up_email_already_in_use(client: TestClient):
     json = {
-        "email": "yu2001@gamil.com",
+        "email": "test@gmail.com",
         "username": "yu",
         "password": "test",
     }
