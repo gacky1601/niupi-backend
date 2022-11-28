@@ -71,3 +71,25 @@ def test_get_user_by_id_id_has_strip_whitespaces(client: TestClient):
             }
         ]
     }
+
+def test_get_users(client: TestClient):
+    response = client.get("/api/users/")
+    assert response.status_code == 200
+    assert response.json() ==[ 
+        {
+            "id": "0df1dacb-67f6-495c-b993-49d06a293765",
+            "email": "test@gmail.com",
+            "username": "test",
+            "address": None,
+            "cellphone_number": None,
+            "role_id": 0,
+        },
+        {
+            "id": "66761879-19ec-45ac-8d3d-41b477bf134b",
+            "email": "ahuhwr886128@gmail.com",
+            "username": "liang",
+            "address": None,
+            "cellphone_number": None,
+            "role_id": 0
+        }
+    ]
