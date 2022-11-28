@@ -51,7 +51,6 @@ def reset_db():
         hashed_password="b",
         role_id=0
     )
-    
     db.add(user1)
 
     db.commit()

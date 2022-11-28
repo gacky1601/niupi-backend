@@ -8,8 +8,8 @@ from app.api.user.schemas import User
 router = APIRouter()
 
 
-@router.get("",response_model=List[User])
+@router.get("", response_model=List[User])
 def read_users(db: Session = Depends(get_db)):
     users = get_all_user(db)
-    
+
     return users

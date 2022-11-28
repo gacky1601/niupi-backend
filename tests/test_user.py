@@ -72,10 +72,11 @@ def test_get_user_by_id_id_has_strip_whitespaces(client: TestClient):
         ]
     }
 
+
 def test_get_users(client: TestClient):
     response = client.get("/api/users/")
     assert response.status_code == 200
-    assert response.json() ==[ 
+    assert response.json() == [
         {
             "id": "0df1dacb-67f6-495c-b993-49d06a293765",
             "email": "test@gmail.com",
@@ -93,6 +94,7 @@ def test_get_users(client: TestClient):
             "role_id": 0
         }
     ]
+
 
 def test_delete_user_by_id_invalid_user_id_format(client: TestClient):
     user_id = "asldijfas>asdfj"
