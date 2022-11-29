@@ -171,6 +171,16 @@ def test_sign_up(client: TestClient):
     assert "hashed_password" not in data
     assert data["id"] == user_id
 
+    response = client.get(f"/api/store/{user_id}")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["user_id"] == user_id
+    assert data["name"] is None
+    assert data["email"] is None
+    assert data["address"] is None
+    assert data["cellphone_number"] is None
+    assert data["telephone_number"] is None
+
 
 def test_sign_up_email_already_in_use(client: TestClient):
     json = {
