@@ -91,11 +91,12 @@ def test_delete_item_by_id_not_exist(client: TestClient):
     item_id = ""
 
     response = client.delete(f"/api/item/{item_id}")
-    
+
     assert response.status_code == 404
     assert response.json() == {
         "detail": "Not Found"
     }
+
 
 def test_delete_item_by_id_invalid_item_id_format(client: TestClient):
     item_id = "asldijfas>asdfj"

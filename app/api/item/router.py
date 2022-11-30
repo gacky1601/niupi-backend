@@ -27,5 +27,5 @@ def read_item(item_id: UUID4, db: Session = Depends(get_db)):
 def delete_item(item_id: UUID4, db: Session = Depends(get_db)):
     if get_item_by_item_id(db, item_id) is None:
         raise IdIsEmpty
-    
+
     delete_item_by_id(db, item_id)
