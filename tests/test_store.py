@@ -219,5 +219,5 @@ def test_initialize_store_non_exist_user(client: TestClient):
 
     assert response.status_code == 404
     assert response.json() == {
-        "detail": "Seller not found"
+        "detail": "Cannot initialize an store that does not exist"
     }

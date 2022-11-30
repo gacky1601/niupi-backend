@@ -8,5 +8,5 @@ StoreNotFound = HTTPException(
 
 SellerNotFound = HTTPException(
     status_code=status.HTTP_404_NOT_FOUND,
-    detail="Seller not found"
+    detail="Cannot initialize an store that does not exist"
 )
