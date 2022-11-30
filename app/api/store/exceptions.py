@@ -5,6 +5,13 @@ StoreNotFound = HTTPException(
     detail="There is no store owned by this user"
 )
 
+
+SellerNotFound = HTTPException(
+    status_code=status.HTTP_404_NOT_FOUND,
+    detail="Seller not found"
+)
+
+
 InvalidCellphoneNumber = HTTPException(
     status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
     detail=[
