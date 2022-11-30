@@ -25,3 +25,5 @@ class Store(Base):
     telephone_number = Column(String)
 
     user = relationship("User", back_populates="store", cascade_backrefs=True)
+
+    item = relationship("Item")
