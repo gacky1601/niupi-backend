@@ -263,6 +263,7 @@ def test_update_user_null_cellphone_number(client: TestClient):
     ]
     }
 
+
 def test_update_user_invalid_user_id(client: TestClient):
     user_id = "000000"
 
