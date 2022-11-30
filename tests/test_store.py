@@ -208,3 +208,16 @@ def test_initialize_store_with_invalid_owner_id(client: TestClient):
             }
         ]
     }
+
+
+def test_initialize_store_non_exist_user(client: TestClient):
+    user_id = "65761879-19ec-45ac-8d3d-41b477bf134b"
+    json = {
+        "name": "NoNutNovember",
+    }
+    response = client.put(f"/api/store/{user_id}", json=json)
+
+    assert response.status_code == 404
+    assert response.json() == {
+        "detail": "Seller not found"
+    }
