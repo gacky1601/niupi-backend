@@ -145,29 +145,6 @@ def test_initialize_store_with_invalid_email(client: TestClient):
     }
 
 
-def test_initialize_store_with_invalid_email(client: TestClient):
-    user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
-    json = {
-        "name": "NoNutNovember",
-        "email": "NNNgmail.com",
-    }
-    response = client.put(f"/api/store/{user_id}", json=json)
-
-    assert response.status_code == 422
-    assert response.json() == {
-        "detail": [
-            {
-                "loc": [
-                    "body",
-                    "email"
-                ],
-                "msg": "value is not a valid email address",
-                "type": "value_error.email"
-            }
-        ]
-    }
-
-
 def test_initialize_store_with_invalid_cellphone_number(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
     json = {
