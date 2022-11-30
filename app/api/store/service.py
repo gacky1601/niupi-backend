@@ -12,7 +12,6 @@ def get_store_by_user_id(db: Session, user_id: UUID):
 def initialize_store_by_owner_id(db: Session, owner_id: UUID4, store: update_Store):
     update = db.query(models.Store).filter(
         models.Store.user_id == owner_id).first()
-
     update.name = store.name
     if store.email:
         update.email = store.email
