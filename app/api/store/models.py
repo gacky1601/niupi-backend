@@ -9,7 +9,8 @@ from app.database import Base
 class Store(Base):
     __tablename__ = "store"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
+    id = Column(UUID(as_uuid=True), primary_key=True,
+                index=True, default=uuid.uuid4)
 
     user_id = Column(
         UUID(as_uuid=True),

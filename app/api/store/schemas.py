@@ -1,7 +1,33 @@
 from typing import Union
 from pydantic import BaseModel, EmailStr, UUID4, constr, validator
-from .exceptions import InvalidCellphoneNumber, InvalidTelephoneNumber
+from fastapi import HTTPException, status
 import re
+
+InvalidCellphoneNumber = HTTPException(
+    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+    detail=[
+        {
+            "loc": [
+                "body",
+                "cellphone_number"
+            ],
+            "msg": "value is not a valid cellphone number",
+            "type": "value_error.cellphone_number"
+        }
+    ]
+)
+
+InvalidTelephoneNumber = HTTPException(
+    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+    detail=[{
+        "loc": [
+            "body",
+            "telephone_number"
+        ],
+        "msg": "value is not a valid telephone number",
+        "type": "value_error.telephone_number"
+    }]
+)
 
 
 class Store(BaseModel):
@@ -17,7 +43,7 @@ class Store(BaseModel):
         orm_mode = True
 
 
-class update_Store(BaseModel):
+class StoreInitialize(BaseModel):
     name: constr(min_length=1, strip_whitespace=True)
     address: Union[constr(min_length=1, strip_whitespace=True), None]
     email: Union[EmailStr, None]

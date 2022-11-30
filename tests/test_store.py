@@ -81,7 +81,7 @@ def test_initialize_store(client: TestClient):
         "email": "NNN@gmail.com",
         "address": "SanDiego",
         "cellphone_number": "0987654321",
-        "telephone_number": "0222542120",
+        "telephone_number": "0222542120"
     }
     response = client.put(f"/api/store/{user_id}", json=json)
 
