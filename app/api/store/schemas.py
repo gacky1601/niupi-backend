@@ -1,6 +1,7 @@
 from typing import Union
 from pydantic import BaseModel, EmailStr, UUID4, constr, validator
 from .exceptions import InvalidCellphoneNumber, InvalidTelephoneNumber
+import re
 
 
 class Store(BaseModel):
@@ -24,17 +25,17 @@ class update_Store(BaseModel):
     telephone_number: Union[constr(min_length=1, strip_whitespace=True), None]
 
     @validator('cellphone_number')
-    def invaild_cellphonenumber(cls, v):
-        if ' ' in v:
+    def invaild_cellphonenumber(cls, value):
+        cellphone_number_Regex = re.compile(r'09\d{8}')
+        cellphone_number_check = cellphone_number_Regex.search(value)
+        if cellphone_number_check is None:
             raise InvalidCellphoneNumber
-        if len(v) != 10:
-            raise InvalidCellphoneNumber
-        return v.title()
+        return value.title()
 
     @validator('telephone_number')
-    def invaild_telephonenumber(cls, v):
-        if ' ' in v:
+    def invaild_telephonenumber(cls, value):
+        telephone_number_Regex = re.compile(r'((02|03|04|05|06|07|08)\d{8})')
+        telephone_number_check = telephone_number_Regex.search(value)
+        if telephone_number_check is None:
             raise InvalidTelephoneNumber
-        if len(v) != 10:
-            raise InvalidTelephoneNumber
-        return v.title()
+        return value.title()
