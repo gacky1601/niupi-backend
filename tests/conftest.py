@@ -56,5 +56,16 @@ def reset_db():
 
     db.add(item)
 
+    item1 = Item(
+        id="16c9a2d0-2f3d-4730-8e30-d4232366d2c4",
+        name="pain",
+        description="so painful",
+        price=690,
+        store_id="49b2b69a-512c-4492-a5ea-50633893f8cc",
+        inventory=50
+    )
+
+    db.add(item1)
+
     db.commit()
     db.close()
