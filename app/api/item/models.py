@@ -16,7 +16,6 @@ class Item(Base):
     store_id = Column(
         UUID(as_uuid=True),
         ForeignKey("store.id", ondelete="CASCADE"),
-        unique=True,
         nullable=False
     )
     inventory = Column(Integer)

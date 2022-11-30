@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from pydantic import UUID4
 from .schemas import item
-from .service import get_item_by_item_id
+from .service import get_item_by_item_id, delete_item_by_id
 from .dependencies import get_db
 from .exceptions import ItemNotExist, IdIsEmpty
 
@@ -21,3 +21,11 @@ def read_item(item_id: UUID4, db: Session = Depends(get_db)):
         raise ItemNotExist
 
     return item
+
+
+@router.delete("/{item_id}", status_code=204)
+def delete_item(item_id: UUID4, db: Session = Depends(get_db)):
+    if get_item_by_item_id(db, item_id) is None:
+        raise IdIsEmpty
+    
+    delete_item_by_id(db, item_id)
