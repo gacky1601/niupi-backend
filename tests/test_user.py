@@ -143,12 +143,8 @@ def test_update_user_by_id(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
 
     json = {
-        "id": "0df1dacb-67f6-495c-b993-49d06a293765",
         "email": "update@gmail.com",
         "username": "update",
-        "address": None,
-        "cellphone_number": None,
-        "role_id": 0,
     }
 
     response = client.patch(f"/api/user/{user_id}", json=json)
@@ -167,12 +163,8 @@ def test_update_user_by_id(client: TestClient):
 def test_update_user_not_exist_user(client: TestClient):
     user_id = "65761879-19ec-45ac-8d3d-41b477bf134b"
     json = {
-        "id": "0df1dacb-67f6-495c-b993-49d06a293765",
         "email": "update@gmail.com",
         "username": "update",
-        "address": None,
-        "cellphone_number": None,
-        "role_id": 0,
     }
     response = client.patch(f"/api/user/{user_id}", json=json)
     assert response.status_code == 400
@@ -185,12 +177,8 @@ def test_update_user_invalid_email(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
 
     json = {
-        "id": "0df1dacb-67f6-495c-b993-49d06a293765",
         "email": "nnnnn",
         "username": "update",
-        "address": None,
-        "cellphone_number": None,
-        "role_id": 0,
     }
     response = client.patch(f"/api/user/{user_id}", json=json)
     assert response.status_code == 422
@@ -208,16 +196,13 @@ def test_update_user_invalid_email(client: TestClient):
     }
 
 
-def test_update_user_null_address(client: TestClient):
+def test_update_user_address_is_empty_string(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
 
     json = {
-        "id": "0df1dacb-67f6-495c-b993-49d06a293765",
         "email": "update@gmail.com",
         "username": "update",
         "address": "",
-        "cellphone_number": None,
-        "role_id": 0,
     }
     response = client.patch(f"/api/user/{user_id}", json=json)
     assert response.status_code == 422
@@ -236,16 +221,13 @@ def test_update_user_null_address(client: TestClient):
     }
 
 
-def test_update_user_null_cellphone_number(client: TestClient):
+def test_update_user_cellphone_number_is_empty_string(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
 
     json = {
-        "id": "0df1dacb-67f6-495c-b993-49d06a293765",
         "email": "update@gmail.com",
         "username": "update",
-        "address": None,
         "cellphone_number": "",
-        "role_id": 0,
     }
     response = client.patch(f"/api/user/{user_id}", json=json)
     assert response.status_code == 422
@@ -268,12 +250,8 @@ def test_update_user_invalid_user_id(client: TestClient):
     user_id = "000000"
 
     json = {
-        "id": "0df1dacb-67f6-495c-b993-49d06a293765",
         "email": "update@gmail.com",
         "username": "update",
-        "address": None,
-        "cellphone_number": None,
-        "role_id": 0,
     }
     response = client.patch(f"/api/user/{user_id}", json=json)
     assert response.status_code == 422
@@ -292,15 +270,12 @@ def test_update_user_invalid_cellphone_number(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
 
     json = {
-        "id": "0df1dacb-67f6-495c-b993-49d06a293765",
         "email": "update@gmail.com",
         "username": "update",
-        "address": None,
         "cellphone_number": "012345678",
-        "role_id": 0,
     }
     response = client.patch(f"/api/user/{user_id}", json=json)
-    assert response.status_code == 400
+    assert response.status_code == 422
     assert response.json() == {
         "detail": [
             {

@@ -20,6 +20,7 @@ bcrypt = "*"
 flake8 = "*"
 requests = "*"
 pytest = "*"
+regex = "*"
 
 [requires]
 python_version = "3.9"
