@@ -151,7 +151,7 @@ def test_update_user_by_id(client: TestClient):
         "role_id": 0,
     }
 
-    response = client.patch(f"/api/user/{user_id}",json=json)
+    response = client.patch(f"/api/user/{user_id}", json=json)
 
     assert response.json() == {
         "id": "0df1dacb-67f6-495c-b993-49d06a293765",
@@ -174,7 +174,7 @@ def test_update_user_not_exist_user(client: TestClient):
         "cellphone_number": None,
         "role_id": 0,
     }
-    response = client.patch(f"/api/user/{user_id}",json=json)
+    response = client.patch(f"/api/user/{user_id}", json=json)
     assert response.status_code == 400
     assert response.json() == {
         "detail": "Non-existent users cannot be updated"
@@ -192,19 +192,19 @@ def test_update_user_invalid_email(client: TestClient):
         "cellphone_number": None,
         "role_id": 0,
     }
-    response = client.patch(f"/api/user/{user_id}",json=json)
+    response = client.patch(f"/api/user/{user_id}", json=json)
     assert response.status_code == 422
     assert response.json() == {
         "detail": [
-        {
-            "loc": [
-                "body",
-                "email"
-            ],
-            "msg": "value is not a valid email address",
-            "type": "value_error.email"
-        }
-    ]
+            {
+                "loc": [
+                    "body",
+                    "email"
+                ],
+                "msg": "value is not a valid email address",
+                "type": "value_error.email"
+            }
+        ]
     }
 
 
@@ -219,20 +219,20 @@ def test_update_user_null_address(client: TestClient):
         "cellphone_number": None,
         "role_id": 0,
     }
-    response = client.patch(f"/api/user/{user_id}",json=json)
+    response = client.patch(f"/api/user/{user_id}", json=json)
     assert response.status_code == 422
     assert response.json() == {
         'detail': [
-        {
-            'loc': [
-                'body', 
-                'address'
-            ], 
-            'msg': 'ensure this value has at least 1 characters', 
-            'type': 'value_error.any_str.min_length', 
-            'ctx': {'limit_value': 1}
-        }
-    ]
+            {
+                'loc': [
+                    'body',
+                    'address'
+                ],
+                'msg': 'ensure this value has at least 1 characters',
+                'type': 'value_error.any_str.min_length',
+                'ctx': {'limit_value': 1}
+            }
+        ]
     }
 
 
@@ -247,20 +247,20 @@ def test_update_user_null_cellphone_number(client: TestClient):
         "cellphone_number": "",
         "role_id": 0,
     }
-    response = client.patch(f"/api/user/{user_id}",json=json)
+    response = client.patch(f"/api/user/{user_id}", json=json)
     assert response.status_code == 422
     assert response.json() == {
         'detail': [
-        {
-            'loc': [
-                'body', 
-                'cellphone_number'
-            ], 
-            'msg': 'ensure this value has at least 1 characters', 
-            'type': 'value_error.any_str.min_length', 
-            'ctx': {'limit_value': 1}
-        }
-    ]
+            {
+                'loc': [
+                    'body',
+                    'cellphone_number'
+                ],
+                'msg': 'ensure this value has at least 1 characters',
+                'type': 'value_error.any_str.min_length',
+                'ctx': {'limit_value': 1}
+            }
+        ]
     }
 
 
@@ -275,20 +275,20 @@ def test_update_user_invalid_user_id(client: TestClient):
         "cellphone_number": None,
         "role_id": 0,
     }
-    response = client.patch(f"/api/user/{user_id}",json=json)
+    response = client.patch(f"/api/user/{user_id}", json=json)
     assert response.status_code == 422
     assert response.json() == {
         "detail": [
-        {
-            "loc": ["path", "user_id"],
-            "msg": "value is not a valid uuid",
-            "type": "type_error.uuid"
-        }
-    ]
+            {
+                "loc": ["path", "user_id"],
+                "msg": "value is not a valid uuid",
+                "type": "type_error.uuid"
+            }
+        ]
     }
 
 
-def test_update_user_invalid_email(client: TestClient):
+def test_update_user_invalid_cellphone_number(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
 
     json = {
@@ -299,17 +299,17 @@ def test_update_user_invalid_email(client: TestClient):
         "cellphone_number": "012345678",
         "role_id": 0,
     }
-    response = client.patch(f"/api/user/{user_id}",json=json)
+    response = client.patch(f"/api/user/{user_id}", json=json)
     assert response.status_code == 400
     assert response.json() == {
         "detail": [
-        {
-            "loc": [
-                "body",
-                "cellphone_number"
-            ],
-            "msg": "value is not a valid cellphone number",
-            "type": "value_error.cellphone_number"
-        }
-    ]
+            {
+                "loc": [
+                    "body",
+                    "cellphone_number"
+                ],
+                "msg": "value is not a valid cellphone number",
+                "type": "value_error.cellphone_number"
+            }
+        ]
     }
