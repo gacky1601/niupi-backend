@@ -59,13 +59,13 @@ def test_get_item_by_item_id_invalid_item_id_format(client: TestClient):
 def test_get_item_by_item_id_item_id_has_strip_whitespaces(client: TestClient):
     item_id = " 0df1dacb-67f6-495c-b993-49d06a293765 "
 
-    response = client.get(f"/api/store/{item_id}")
+    response = client.get(f"/api/item/{item_id}")
 
     assert response.status_code == 422
     assert response.json() == {
         "detail": [
             {
-                "loc": ["path", "user_id"],
+                "loc": ["path", "item_id"],
                 "msg": "value is not a valid uuid",
                 "type": "type_error.uuid"
             }
