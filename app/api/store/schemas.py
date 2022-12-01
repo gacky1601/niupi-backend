@@ -1,7 +1,9 @@
+import re
+
 from typing import Union
 from pydantic import BaseModel, EmailStr, UUID4, constr, validator
 from fastapi import HTTPException, status
-import re
+
 
 InvalidCellphoneNumber = HTTPException(
     status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
