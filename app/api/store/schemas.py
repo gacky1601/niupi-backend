@@ -5,33 +5,6 @@ from pydantic import BaseModel, EmailStr, UUID4, constr, validator
 from fastapi import HTTPException, status
 
 
-InvalidCellphoneNumber = HTTPException(
-    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-    detail=[
-        {
-            "loc": [
-                "body",
-                "cellphone_number"
-            ],
-            "msg": "value is not a valid cellphone number",
-            "type": "value_error.cellphone_number"
-        }
-    ]
-)
-
-InvalidTelephoneNumber = HTTPException(
-    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-    detail=[{
-        "loc": [
-            "body",
-            "telephone_number"
-        ],
-        "msg": "value is not a valid telephone number",
-        "type": "value_error.telephone_number"
-    }]
-)
-
-
 class Store(BaseModel):
     id: UUID4
     user_id: UUID4
@@ -57,7 +30,19 @@ class StoreInitialize(BaseModel):
         cellphone_number_Regex = re.compile(r'09\d{8}')
         cellphone_number_check = cellphone_number_Regex.search(value)
         if cellphone_number_check is None:
-            raise InvalidCellphoneNumber
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail=[
+                    {
+                        "loc": [
+                            "body",
+                            "cellphone_number"
+                        ],
+                        "msg": "value is not a valid cellphone number",
+                        "type": "value_error.cellphone_number"
+                    }
+                ]
+            )
         return value.title()
 
     @validator('telephone_number')
@@ -65,5 +50,15 @@ class StoreInitialize(BaseModel):
         telephone_number_Regex = re.compile(r'((02|03|04|05|06|07|08)\d{8})')
         telephone_number_check = telephone_number_Regex.search(value)
         if telephone_number_check is None:
-            raise InvalidTelephoneNumber
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail=[{
+                    "loc": [
+                        "body",
+                        "telephone_number"
+                    ],
+                    "msg": "value is not a valid telephone number",
+                    "type": "value_error.telephone_number"
+                }]
+            )
         return value.title()
