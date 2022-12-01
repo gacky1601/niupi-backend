@@ -1,10 +1,10 @@
-import email
 import pytest
 from fastapi.testclient import TestClient
+from sqlalchemy.orm import Session
+from bcrypt import hashpw, gensalt
 
 from app.main import app
 from app.database import SessionLocal, initialize_db
-
 from app.api.store.models import Store
 from app.api.user.models import User
 
@@ -14,6 +14,21 @@ base_url = "http://127.0.0.1:8000"
 @pytest.fixture
 def client():
     return TestClient(app, base_url)
+
+
+def initialize_user_test_data(database: Session):
+    password = "a".encode("utf-8")
+    hashed_password = hashpw(password, gensalt()).decode("utf-8")
+
+    user = User(
+        id="0df1dacb-67f6-495c-b993-49d06a293765",
+        username="test",
+        hashed_password=hashed_password,
+        email="test@gmail.com",
+        role_id=0
+    )
+
+    database.add(user)
 
 
 @pytest.fixture(autouse=True)
@@ -34,15 +49,7 @@ def reset_db():
 
     db.add(store)
 
-    user = User(
-        id="0df1dacb-67f6-495c-b993-49d06a293765",
-        username="test",
-        hashed_password="a",
-        email="test@gmail.com",
-        role_id=0
-    )
-
-    db.add(user)
+    initialize_user_test_data(db)
 
     db.commit()
     db.close()
