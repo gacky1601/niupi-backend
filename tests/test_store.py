@@ -97,6 +97,28 @@ def test_initialize_store(client: TestClient):
     }
 
 
+def test_initialize_store_without_cellphone_number(client: TestClient):
+    user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
+    json = {
+        "name": "NoNutNovember",
+        "email": "NNN@gmail.com",
+        "address": "SanDiego",
+        "telephone_number": "0222542120",
+    }
+    response = client.put(f"/api/store/{user_id}", json=json)
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
+        "user_id": "0df1dacb-67f6-495c-b993-49d06a293765",
+        "name": "NoNutNovember",
+        "address": "SanDiego",
+        "email": "NNN@gmail.com",
+        "cellphone_number": None,
+        "telephone_number": "0222542120",
+    }
+
+
 def test_initialize_store_with_empty_name(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
     json = {
