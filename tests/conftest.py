@@ -44,5 +44,14 @@ def reset_db():
 
     db.add(user)
 
+    user1 = User(
+        id="66761879-19ec-45ac-8d3d-41b477bf134b",
+        email="ahuhwr886128@gmail.com",
+        username="liang",
+        hashed_password="b",
+        role_id=0
+    )
+    db.add(user1)
+
     db.commit()
     db.close()
