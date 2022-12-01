@@ -81,7 +81,7 @@ def test_initialize_store(client: TestClient):
         "email": "NNN@gmail.com",
         "address": "SanDiego",
         "cellphone_number": "0987654321",
-        "telephone_number": "0222542120"
+        "telephone_number": "02-22542120"
     }
     response = client.put(f"/api/store/{user_id}", json=json)
 
@@ -93,7 +93,7 @@ def test_initialize_store(client: TestClient):
         "address": "SanDiego",
         "email": "NNN@gmail.com",
         "cellphone_number": "0987654321",
-        "telephone_number": "0222542120",
+        "telephone_number": "02-22542120",
     }
 
 
@@ -114,7 +114,7 @@ def test_initialize_store_without_cellphone_number(client: TestClient):
         "name": "NoNutNovember",
         "address": "SanDiego",
         "email": "NNN@gmail.com",
-        "cellphone_number": None,
+        "cellphone_number": "0000000000",
         "telephone_number": "0222542120",
     }
 
@@ -177,14 +177,12 @@ def test_initialize_store_with_invalid_cellphone_number(client: TestClient):
 
     assert response.status_code == 422
     assert response.json() == {
-        "detail": [
+        'detail': [
             {
-                "loc": [
-                    "body",
-                    "cellphone_number"
-                ],
-                "msg": "value is not a valid cellphone number",
-                "type": "value_error.cellphone_number"
+                'ctx': {'pattern': '^09\\d{8}$'},
+                'loc': ['body', 'cellphone_number'],
+                'msg': 'string does not match regex "^09\\d{8}$"',
+                'type': 'value_error.str.regex'
             }
         ]
     }
@@ -200,14 +198,12 @@ def test_initialize_store_with_invalid_telephone_number(client: TestClient):
 
     assert response.status_code == 422
     assert response.json() == {
-        "detail": [
+        'detail': [
             {
-                "loc": [
-                    "body",
-                    "telephone_number"
-                ],
-                "msg": "value is not a valid telephone number",
-                "type": "value_error.telephone_number"
+                'ctx': {'pattern': '^[\\d{2,4}\\-\\d{6,8}]{10,11}$'},
+                'loc': ['body', 'telephone_number'],
+                'msg': 'string does not match regex "^[\\d{2,4}\\-\\d{6,8}]{10,11}$"',
+                'type': 'value_error.str.regex'
             }
         ]
     }
@@ -239,7 +235,7 @@ def test_initialize_store_non_exist_user(client: TestClient):
     }
     response = client.put(f"/api/store/{user_id}", json=json)
 
-    assert response.status_code == 404
+    assert response.status_code == 400
     assert response.json() == {
         "detail": "Cannot initialize an store that does not exist"
     }

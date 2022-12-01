@@ -21,7 +21,6 @@ flake8 = "*"
 requests = "*"
 pytest = "*"
 autopep8 = "*"
-regex = "*"
 
 [requires]
 python_version = "3.9"

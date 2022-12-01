@@ -1,4 +1,5 @@
 from uuid import UUID
+
 from sqlalchemy.orm import Session
 from pydantic import UUID4
 
@@ -13,7 +14,7 @@ def get_store_by_user_id(db: Session, user_id: UUID):
 def initialize_store(db: Session, owner_id: UUID4, payload: StoreInitialize):
     db.query(models.Store) \
       .filter(models.Store.user_id == owner_id) \
-      .update(payload.dict(), synchronize_session="fetch")
+      .update(payload.dict(exclude_none=True), synchronize_session="fetch")
 
     initialized_store = get_store_by_user_id(db, owner_id)
 
