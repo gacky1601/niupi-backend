@@ -21,7 +21,7 @@ def read_store(user_id: UUID4, db: Session = Depends(get_db)):
 
 
 @router.put("/{owner_id}", response_model=Store)
-def initialize_store(owner_id: UUID4, store: StoreInitialize, db: Session = Depends((get_db))):
+def initialize_store(owner_id: UUID4, store: StoreInitialize, db: Session = Depends(get_db)):
     seller = service.get_store_by_user_id(db, owner_id)
 
     if seller is None:

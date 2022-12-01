@@ -1,7 +1,7 @@
 from typing import Optional
 
 from pydantic import BaseModel, EmailStr, UUID4, constr
-from app.utils.validator import cellphone_number_regex, telephone_number_regex
+from app.utils.validator import cellphone_number_regex, telephone_number_regex, email_regex
 
 
 class Store(BaseModel):
