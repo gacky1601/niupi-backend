@@ -53,7 +53,7 @@ class StoreInitialize(BaseModel):
     telephone_number: Union[constr(min_length=1, strip_whitespace=True), None]
 
     @validator('cellphone_number')
-    def invaild_cellphonenumber(cls, value):
+    def invaild_cellphone_number(cls, value):
         cellphone_number_Regex = re.compile(r'09\d{8}')
         cellphone_number_check = cellphone_number_Regex.search(value)
         if cellphone_number_check is None:
@@ -61,7 +61,7 @@ class StoreInitialize(BaseModel):
         return value.title()
 
     @validator('telephone_number')
-    def invaild_telephonenumber(cls, value):
+    def invaild_telephone_number(cls, value):
         telephone_number_Regex = re.compile(r'((02|03|04|05|06|07|08)\d{8})')
         telephone_number_check = telephone_number_Regex.search(value)
         if telephone_number_check is None:
