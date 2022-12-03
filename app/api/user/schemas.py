@@ -31,9 +31,9 @@ class UserUpdate(BaseModel):
                strip_whitespace=True,
                regex=validator.cellphone_number_regex)
     ]
-    __table_args__ = (CheckConstraint(
-        "REGEXP_LIKE(email,'^[a-zA-Z0-9]+@+[a-zA-Z0-9-]+.+([a-zA-Z]{2,4})$')",
-        name='emailcheck'))
-    __table_args__ = (CheckConstraint(
-        "REGEXP_LIKE(cellphone_number,'^09+([0-9]{8})$')",
-        name='cellphone_numbercheck'))
+    # __table_args__ = (CheckConstraint(
+    #     "REGEXP_LIKE(email,'^[a-zA-Z0-9]+@+[a-zA-Z0-9-]+.+([a-zA-Z]{2,4})$')",
+    #     name='emailcheck'))
+    # __table_args__ = (CheckConstraint(
+    #     "REGEXP_LIKE(cellphone_number,'^09+([0-9]{8})$')",
+    #     name='cellphone_numbercheck'))
