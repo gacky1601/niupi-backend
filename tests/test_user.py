@@ -178,7 +178,6 @@ def test_update_user_invalid_email(client: TestClient):
 
     json = {
         "email": "nnnnn",
-        "username": "update",
     }
     response = client.patch(f"/api/user/{user_id}", json=json)
     assert response.status_code == 422
@@ -200,8 +199,6 @@ def test_update_user_address_is_empty_string(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
 
     json = {
-        "email": "update@gmail.com",
-        "username": "update",
         "address": "",
     }
     response = client.patch(f"/api/user/{user_id}", json=json)
@@ -225,8 +222,6 @@ def test_update_user_cellphone_number_is_empty_string(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
 
     json = {
-        "email": "update@gmail.com",
-        "username": "update",
         "cellphone_number": "",
     }
     response = client.patch(f"/api/user/{user_id}", json=json)
@@ -270,8 +265,6 @@ def test_update_user_invalid_cellphone_number(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
 
     json = {
-        "email": "update@gmail.com",
-        "username": "update",
         "cellphone_number": "012345678",
     }
     response = client.patch(f"/api/user/{user_id}", json=json)
@@ -283,8 +276,9 @@ def test_update_user_invalid_cellphone_number(client: TestClient):
                     "body",
                     "cellphone_number"
                 ],
-                "msg": "value is not a valid cellphone number",
-                "type": "value_error.cellphone_number"
+                "msg": 'string does not match regex "^09\\d{8}$"',
+                "type": "value_error.str.regex",
+                'ctx': {'pattern': '^09\\d{8}$'}
             }
         ]
     }
