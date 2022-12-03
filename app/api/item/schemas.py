@@ -2,9 +2,9 @@ from typing import Union
 from pydantic import BaseModel, UUID4, constr
 
 
-class item(BaseModel):
+class Item(BaseModel):
     id: UUID4
-    name: Union[constr(min_length=1, strip_whitespace=True), None]
+    name: constr(min_length=1, strip_whitespace=True)
     description: str
     price: int
     store_id: UUID4
