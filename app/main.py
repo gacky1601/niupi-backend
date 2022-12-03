@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 
 from . import api
-from .database import initialize_db
 from .config import config, Environment
+from .database import initialize_db
 
 initialize_db()
 
