@@ -1,12 +1,12 @@
-import pytest
-from fastapi.testclient import TestClient
-from sqlalchemy.orm import Session
 from bcrypt import hashpw, gensalt
+import pytest
+from sqlalchemy.orm import Session
+from fastapi.testclient import TestClient
 
-from app.main import app
-from app.database import SessionLocal, initialize_db
 from app.api.store.models import Store
 from app.api.user.models import User
+from app.database import SessionLocal, initialize_db
+from app.main import app
 
 base_url = "http://127.0.0.1:8000"
 
