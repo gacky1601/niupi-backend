@@ -1,8 +1,10 @@
 import re
+from typing import Union, Optional
+from pydantic import BaseModel, EmailStr, UUID4, Field, constr
+from sqlalchemy import CheckConstraint
 
-from typing import Union
-from pydantic import BaseModel, EmailStr, UUID4, Field, constr, validator
 from fastapi import HTTPException, status
+from app.utils import validator
 
 
 class UserBase(BaseModel):
@@ -21,28 +23,17 @@ class User(UserBase):
 
 
 class UserUpdate(BaseModel):
-    email: EmailStr
-    username: constr(min_length=1, strip_whitespace=True)
-    address: Union[constr(min_length=1, strip_whitespace=True), None]
-    cellphone_number: Union[constr(min_length=1, strip_whitespace=True), None]
-
-    @validator('cellphone_number')
-    def invaild_cellphonenumber(cls, value):
-        InvalidCellphoneNumber = HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail=[
-                {
-                    "loc": [
-                        "body",
-                        "cellphone_number"
-                    ],
-                    "msg": "value is not a valid cellphone number",
-                    "type": "value_error.cellphone_number"
-                }
-            ]
-        )
-        cellphone_number_Regex = re.compile(r'09\d{8}')
-        cellphone_number_check = cellphone_number_Regex.search(value)
-        if cellphone_number_check is None:
-            raise InvalidCellphoneNumber
-        return value.title()
+    email: Optional[EmailStr]
+    username: Optional[constr(min_length=1, strip_whitespace=True)]
+    address: Optional[constr(min_length=1, strip_whitespace=True)]
+    cellphone_number: Optional[
+        constr(min_length=1,
+               strip_whitespace=True,
+               regex=validator.cellphone_number_regex)
+    ]
+    __table_args__ = (CheckConstraint(
+        "REGEXP_LIKE(email,'^[a-zA-Z0-9]+@+[a-zA-Z0-9-]+.+([a-zA-Z]{2,4})$')",
+        name='emailcheck'))
+    __table_args__ = (CheckConstraint(
+        "REGEXP_LIKE(cellphone_number,'^09+([0-9]{8})$')",
+        name='cellphone_numbercheck'))
