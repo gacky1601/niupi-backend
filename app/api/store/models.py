@@ -39,4 +39,4 @@ CheckConstraint(
 
 CheckConstraint(
     "REGEXP_LIKE(Store.telephone_number," + telephone_number_regex,
-    name='cellphone_numbercheck')
+    name='telephone_numbercheck')
