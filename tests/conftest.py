@@ -80,7 +80,7 @@ def reset_db():
         hashed_password="b",
         role_id=0
     )
-    
+
     db.add(user1)
 
     initialize_item_test_data(db)
