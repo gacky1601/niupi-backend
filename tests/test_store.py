@@ -170,7 +170,6 @@ def test_initialize_store_with_invalid_email(client: TestClient):
 def test_initialize_store_with_invalid_cellphone_number(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
     json = {
-        "name": "NoNutNovember",
         "cellphone_number": "8888",
     }
     response = client.put(f"/api/store/{user_id}", json=json)
@@ -191,7 +190,6 @@ def test_initialize_store_with_invalid_cellphone_number(client: TestClient):
 def test_initialize_store_with_invalid_telephone_number(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
     json = {
-        "name": "NoNutNovember",
         "telephone_number": "4444",
     }
     response = client.put(f"/api/store/{user_id}", json=json)
