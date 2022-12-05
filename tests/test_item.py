@@ -13,7 +13,8 @@ def test_get_item_by_item_id(client: TestClient):
         "description": "so many water",
         "price": 500,
         "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
-        "inventory": 50
+        "inventory": 50,
+        "photos": ["002891b5-6019-4144-b174-9aaaf8095063","f5832ea6-4c3c-48f0-8bd6-72ebd8754758"]
     }
 
 
@@ -28,7 +29,7 @@ def test_get_item_by_item_id_not_found(client: TestClient):
     }
 
 
-def test_get_item_by_item_id_not_exist(client: TestClient):
+def test_get_item_by_item_id_item_id_is_empty_string(client: TestClient):
     item_id = ""
 
     response = client.get(f"/api/item/{item_id}")
