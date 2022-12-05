@@ -18,7 +18,7 @@ class Store(BaseModel):
 
 
 class StoreInitialize(BaseModel):
-    name: constr(min_length=1, strip_whitespace=True)
+    name: Optional[constr(min_length=1, strip_whitespace=True)]
     address: Optional[constr(min_length=1, strip_whitespace=True)]
     email: Optional[EmailStr]
 
