@@ -1,6 +1,6 @@
+import pytest
 from bcrypt import hashpw, gensalt
 from fastapi.testclient import TestClient
-import pytest
 from sqlalchemy.orm import Session
 
 from app.api.store.models import Store
