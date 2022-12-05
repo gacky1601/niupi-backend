@@ -1,6 +1,7 @@
 from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import CheckConstraint
 import uuid
 
 from app.database import Base
@@ -33,3 +34,11 @@ class User(Base):
         cascade="all, delete",
         passive_deletes=True
     )
+
+
+CheckConstraint(
+    "REGEXP_LIKE(email,'^[a-zA-Z0-9]+@+[a-zA-Z0-9-]+.+([a-zA-Z]{2,4})$')",
+    name='emailcheck')
+CheckConstraint(
+    "REGEXP_LIKE(cellphone_number,'^09+([0-9]{8})$')",
+    name='cellphone_numbercheck')
