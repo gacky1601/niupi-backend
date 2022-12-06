@@ -8,7 +8,7 @@ from app.database import SessionLocal, initialize_db
 
 from app.api.store.models import Store
 from app.api.user.models import User
-from app.api.item.models import Item, ItemPhoto
+from app.api.items.models import Item, ItemPhoto
 
 base_url = "http://127.0.0.1:8000"
 
@@ -29,20 +29,21 @@ def initialize_item_test_data(database: Session):
         inventory=50
     )
 
+    database.add(item)
+
     photo = ItemPhoto(
         id="002891b5-6019-4144-b174-9aaaf8095063",
         item_id="0df1dacb-67f6-495c-b993-49d06a293787"
     )
-    photo1 = ItemPhoto(
+
+    database.add(photo)
+
+    photo = ItemPhoto(
         id="f5832ea6-4c3c-48f0-8bd6-72ebd8754758",
         item_id="0df1dacb-67f6-495c-b993-49d06a293787"
     )
 
-    database.add(item)
-
     database.add(photo)
-
-    database.add(photo1)
 
 
 @pytest.fixture(autouse=True)

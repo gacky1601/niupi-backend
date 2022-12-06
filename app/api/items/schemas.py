@@ -1,4 +1,5 @@
 from typing import Optional
+
 from pydantic import BaseModel, UUID4, constr
 
 
@@ -9,7 +10,7 @@ class Item(BaseModel):
     price: int
     store_id: UUID4
     inventory: int
-    photos: list[UUID4]
+    photo_ids: list[UUID4]
 
     class Config:
         orm_mode = True
