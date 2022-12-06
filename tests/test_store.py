@@ -114,7 +114,7 @@ def test_initialize_store_without_cellphone_number(client: TestClient):
         "name": "NoNutNovember",
         "address": "SanDiego",
         "email": "NNN@gmail.com",
-        "cellphone_number": "0900000000",
+        "cellphone_number": "0000000000",
         "telephone_number": "0222542120",
     }
 
@@ -179,7 +179,7 @@ def test_initialize_store_with_invalid_cellphone_number(client: TestClient):
             {
                 'ctx': {'pattern': '^09\\d{8}$'},
                 'loc': ['body', 'cellphone_number'],
-                'msg': 'string does not match regex "^09+([0-9]{8})$"',
+                'msg': 'string does not match regex "^09\\d{8}$"',
                 'type': 'value_error.str.regex'
             }
         ]
@@ -199,7 +199,7 @@ def test_initialize_store_with_invalid_telephone_number(client: TestClient):
             {
                 'ctx': {'pattern': '^[\\d{2,4}\\-\\d{6,8}]{10,11}$'},
                 'loc': ['body', 'telephone_number'],
-                'msg': 'string does not match regex "^[\d{2,4}\-\d{6,8}]{10,11}$"',
+                'msg': 'string does not match regex "^[\\d{2,4}\\-\\d{6,8}]{10,11}$"',
                 'type': 'value_error.str.regex'
             }
         ]
