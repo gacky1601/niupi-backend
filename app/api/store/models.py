@@ -24,7 +24,7 @@ class Store(Base):
             name='telephone_numbercheck'
         )
     )
-    
+
     id = Column(UUID(as_uuid=True), primary_key=True,
                 index=True, default=uuid.uuid4)
 
