@@ -1,11 +1,9 @@
 import uuid
 
 from sqlalchemy import Column, ForeignKey, Integer, String
-from sqlalchemy.ext.hybrid import hybrid_property
-
-from sqlalchemy.orm import relationship
-
 from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.orm import relationship
 
 from app.database import Base
 
@@ -34,10 +32,6 @@ class Item(Base):
     inventory = Column(Integer, nullable=False)
 
     photos = relationship("ItemPhoto", backref="item")
-
-    @hybrid_property
-    def photo_ids(self):
-        return list(map(lambda photo: photo.id, self.photos))
 
 
 class ItemPhoto(Base):
