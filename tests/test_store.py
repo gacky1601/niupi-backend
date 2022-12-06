@@ -147,7 +147,6 @@ def test_initialize_store_with_empty_name(client: TestClient):
 def test_initialize_store_with_invalid_email(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
     json = {
-        "name": "NoNutNovember",
         "email": "NNNgmail.com",
     }
     response = client.put(f"/api/store/{user_id}", json=json)
