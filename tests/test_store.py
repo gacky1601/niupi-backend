@@ -13,8 +13,8 @@ def test_get_store_by_user_id(client: TestClient):
         "name": "test",
         "address": "test",
         "email": "test@gmail.com",
-        "cellphone_number": "0000000000",
-        "telephone_number": "0000000000"
+        "cellphone_number": "0900000000",
+        "telephone_number": "02-22222222"
     }
 
 
@@ -114,7 +114,7 @@ def test_initialize_store_without_cellphone_number(client: TestClient):
         "name": "NoNutNovember",
         "address": "SanDiego",
         "email": "NNN@gmail.com",
-        "cellphone_number": "0000000000",
+        "cellphone_number": "0900000000",
         "telephone_number": "0222542120",
     }
 
@@ -177,9 +177,9 @@ def test_initialize_store_with_invalid_cellphone_number(client: TestClient):
     assert response.json() == {
         'detail': [
             {
-                'ctx': {'pattern': '^09\\d{8}$'},
+                'ctx': {'pattern': '^09+([0-9]{8})$'},
                 'loc': ['body', 'cellphone_number'],
-                'msg': 'string does not match regex "^09\\d{8}$"',
+                'msg': 'string does not match regex "^09+([0-9]{8})$"',
                 'type': 'value_error.str.regex'
             }
         ]
