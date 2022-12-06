@@ -10,20 +10,6 @@ from app.utils.validator import cellphone_number_regex, email_regex, telephone_n
 class Store(Base):
     __tablename__ = "store"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
-
-    user_id = Column(
-        UUID(as_uuid=True),
-        ForeignKey("users.id", ondelete="CASCADE"),
-        unique=True,
-        nullable=False
-    )
-
-    name = Column(String, unique=True, index=True)
-    address = Column(String)
-    email = Column(String)
-    cellphone_number = Column(String)
-    telephone_number = Column(String)
     __table_args__ = (
         CheckConstraint(
             f"REGEXP_LIKE(cellphone_number,'{cellphone_number_regex}')",
@@ -38,4 +24,21 @@ class Store(Base):
             name='telephone_numbercheck'
         )
     )
+    
+    id = Column(UUID(as_uuid=True), primary_key=True,
+                index=True, default=uuid.uuid4)
+
+    user_id = Column(
+        UUID(as_uuid=True),
+        ForeignKey("users.id", ondelete="CASCADE"),
+        unique=True,
+        nullable=False
+    )
+
+    name = Column(String, unique=True, index=True)
+    address = Column(String)
+    email = Column(String)
+    cellphone_number = Column(String)
+    telephone_number = Column(String)
+
     user = relationship("User", back_populates="store", cascade_backrefs=True)
