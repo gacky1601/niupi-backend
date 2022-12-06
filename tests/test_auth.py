@@ -245,8 +245,8 @@ def test_login_empty_password_string(client: TestClient):
 
 def test_login(client: TestClient):
     json = {
-        "email": "yu2001@gamil.com",
-        "password": "test",
+        "email": "test@gmail.com",
+        "password": "a",
     }
 
     response = client.get("/api/auth/login", json=json)
@@ -254,8 +254,8 @@ def test_login(client: TestClient):
     assert response.status_code == 200
 
     data = response.json()
-    assert data["email"] == "yu2001@gamil.com"
-    assert data["username"] == "yu"
+    assert data["email"] == "test@gmail.com"
+    assert data["username"] == "test"
     assert data["address"] is None
     assert data["cellphone_number"] is None
     assert data["role_id"] == 0
@@ -266,8 +266,8 @@ def test_login(client: TestClient):
     response = client.get(f"/api/user/{user_id}")
     assert response.status_code == 200
     data = response.json()
-    assert data["email"] == "yu2001@gamil.com"
-    assert data["username"] == "yu"
+    assert data["email"] == "test@gmail.com"
+    assert data["username"] == "test"
     assert data["address"] is None
     assert data["cellphone_number"] is None
     assert data["role_id"] == 0
