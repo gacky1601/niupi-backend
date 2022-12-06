@@ -10,8 +10,7 @@ from app.utils.validator import cellphone_number_regex, email_regex, telephone_n
 class Store(Base):
     __tablename__ = "store"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, index=True,
-                default=uuid.uuid4)
+    id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
 
     user_id = Column(
         UUID(as_uuid=True),
@@ -25,21 +24,18 @@ class Store(Base):
     email = Column(String)
     cellphone_number = Column(String)
     telephone_number = Column(String)
-
+    __table_args__ = (
+        CheckConstraint(
+            f"REGEXP_LIKE(cellphone_number,'{cellphone_number_regex}')",
+            name='cellphone_numbercheck'
+        ),
+        CheckConstraint(
+            f"REGEXP_LIKE(email,'{email_regex}')",
+            name='emailcheck'
+        ),
+        CheckConstraint(
+            f"REGEXP_LIKE(telephone_number,'{telephone_number_regex}')",
+            name='telephone_numbercheck'
+        )
+    )
     user = relationship("User", back_populates="store", cascade_backrefs=True)
-
-
-CheckConstraint(
-    "REGEXP_LIKE(Store.email,{email_regex})",
-    name='emailcheck'
-)
-
-CheckConstraint(
-    "REGEXP_LIKE(Store.cellphone_number,{cellphone_number_regex}",
-    name='cellphone_numbercheck'
-)
-
-CheckConstraint(
-    "REGEXP_LIKE(Store.telephone_number,{telephone_number_regex}",
-    name='telephone_numbercheck'
-)
