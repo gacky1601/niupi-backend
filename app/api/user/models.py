@@ -38,7 +38,10 @@ class User(Base):
 
 CheckConstraint(
     "REGEXP_LIKE(email,'^[a-zA-Z0-9]+@+[a-zA-Z0-9-]+.+([a-zA-Z]{2,4})$')",
-    name='emailcheck')
+    name='emailcheck'
+)
+
 CheckConstraint(
     "REGEXP_LIKE(cellphone_number,'^09+([0-9]{8})$')",
-    name='cellphone_numbercheck')
+    name='cellphone_numbercheck'
+)

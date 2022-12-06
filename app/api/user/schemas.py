@@ -1,5 +1,6 @@
 import re
 from typing import Optional
+
 from pydantic import BaseModel, EmailStr, UUID4, Field, constr
 from fastapi import HTTPException, status
 
