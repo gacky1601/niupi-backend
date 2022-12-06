@@ -19,7 +19,6 @@ def client():
     return TestClient(app, base_url)
 
 
-
 def initialize_item_test_data(database: Session):
 
     item = Item(
@@ -47,6 +46,7 @@ def initialize_item_test_data(database: Session):
 
     database.add(photo)
 
+
 def initialize_user_test_data(database: Session):
     password = "a".encode("utf-8")
     hashed_password = hashpw(password, gensalt()).decode("utf-8")
@@ -60,7 +60,6 @@ def initialize_user_test_data(database: Session):
     )
 
     database.add(user)
-
 
 
 @pytest.fixture(autouse=True)
