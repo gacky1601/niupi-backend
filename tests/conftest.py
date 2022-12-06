@@ -1,5 +1,5 @@
 import pytest
-from bcrypt import hashpw, gensalt
+from bcrypt import gensalt, hashpw
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
