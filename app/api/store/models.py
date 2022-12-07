@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 
+from app.api.items.models import Item
 from app.database import Base
 from app.utils.validator import cellphone_number_regex, email_regex, telephone_number_regex
 
@@ -41,3 +42,5 @@ class Store(Base):
     telephone_number = Column(String)
 
     user = relationship("User", back_populates="store", cascade_backrefs=True)
+
+    item = relationship("Item")
