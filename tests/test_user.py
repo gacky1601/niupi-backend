@@ -299,9 +299,9 @@ def test_update_user_invalid_cellphone_number(client: TestClient):
                     "body",
                     "cellphone_number"
                 ],
-                "msg": 'string does not match regex "^09\\d{8}$"',
+                "msg": 'string does not match regex "^09+([0-9]{8})$"',
                 "type": "value_error.str.regex",
-                'ctx': {'pattern': '^09\\d{8}$'}
+                'ctx': {'pattern': '^09+([0-9]{8})$'}
             }
         ]
     }

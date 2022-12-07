@@ -13,8 +13,8 @@ def test_get_store_by_user_id(client: TestClient):
         "name": "test",
         "address": "test",
         "email": "test@gmail.com",
-        "cellphone_number": "0000000000",
-        "telephone_number": "0000000000"
+        "cellphone_number": "0900000000",
+        "telephone_number": "02-22222222"
     }
 
 
@@ -71,4 +71,168 @@ def test_get_store_by_user_id_user_id_has_strip_whitespaces(client: TestClient):
                 "type": "type_error.uuid"
             }
         ]
+    }
+
+
+def test_initialize_store(client: TestClient):
+    user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
+    json = {
+        "name": "NoNutNovember",
+        "email": "NNN@gmail.com",
+        "address": "SanDiego",
+        "cellphone_number": "0987654321",
+        "telephone_number": "02-22542120"
+    }
+    response = client.put(f"/api/store/{user_id}", json=json)
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
+        "user_id": "0df1dacb-67f6-495c-b993-49d06a293765",
+        "name": "NoNutNovember",
+        "address": "SanDiego",
+        "email": "NNN@gmail.com",
+        "cellphone_number": "0987654321",
+        "telephone_number": "02-22542120",
+    }
+
+
+def test_initialize_store_without_cellphone_number(client: TestClient):
+    user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
+    json = {
+        "name": "NoNutNovember",
+        "email": "NNN@gmail.com",
+        "address": "SanDiego",
+        "telephone_number": "02-22542120",
+    }
+    response = client.put(f"/api/store/{user_id}", json=json)
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
+        "user_id": "0df1dacb-67f6-495c-b993-49d06a293765",
+        "name": "NoNutNovember",
+        "address": "SanDiego",
+        "email": "NNN@gmail.com",
+        "cellphone_number": "0900000000",
+        "telephone_number": "02-22542120",
+    }
+
+
+def test_initialize_store_with_empty_name(client: TestClient):
+    user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
+    json = {
+        "name": "",
+    }
+    response = client.put(f"/api/store/{user_id}", json=json)
+
+    assert response.status_code == 422
+    assert response.json() == {
+        "detail": [
+            {
+                "ctx": {
+                    "limit_value": 1
+                },
+                "loc": [
+                    "body",
+                    "name"
+                ],
+                "msg": "ensure this value has at least 1 characters",
+                "type": "value_error.any_str.min_length"
+            }
+        ]
+    }
+
+
+def test_initialize_store_with_invalid_email(client: TestClient):
+    user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
+    json = {
+        "email": "NNNgmail.com",
+    }
+    response = client.put(f"/api/store/{user_id}", json=json)
+
+    assert response.status_code == 422
+    assert response.json() == {
+        "detail": [
+            {
+                "loc": [
+                    "body",
+                    "email"
+                ],
+                "msg": "value is not a valid email address",
+                "type": "value_error.email"
+            }
+        ]
+    }
+
+
+def test_initialize_store_with_invalid_cellphone_number(client: TestClient):
+    user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
+    json = {
+        "cellphone_number": "8888",
+    }
+    response = client.put(f"/api/store/{user_id}", json=json)
+
+    assert response.status_code == 422
+    assert response.json() == {
+        'detail': [
+            {
+                'ctx': {'pattern': '^09+([0-9]{8})$'},
+                'loc': ['body', 'cellphone_number'],
+                'msg': 'string does not match regex "^09+([0-9]{8})$"',
+                'type': 'value_error.str.regex'
+            }
+        ]
+    }
+
+
+def test_initialize_store_with_invalid_telephone_number(client: TestClient):
+    user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
+    json = {
+        "telephone_number": "4444",
+    }
+    response = client.put(f"/api/store/{user_id}", json=json)
+
+    assert response.status_code == 422
+    assert response.json() == {
+        'detail': [
+            {
+                'ctx': {'pattern': '^(?=([0-9]{2,4}\\-[0-9]{6,8})).{10,11}$'},
+                'loc': ['body', 'telephone_number'],
+                'msg': 'string does not match regex "^(?=([0-9]{2,4}\\-[0-9]{6,8})).{10,11}$"',
+                'type': 'value_error.str.regex'
+            }
+        ]
+    }
+
+
+def test_initialize_store_with_invalid_owner_id(client: TestClient):
+    user_id = "qwerasdf"
+    json = {
+        "name": "NoNutNovember",
+    }
+    response = client.put(f"/api/store/{user_id}", json=json)
+
+    assert response.status_code == 422
+    assert response.json() == {
+        "detail": [
+            {
+                "loc": ["path", "owner_id"],
+                "msg": "value is not a valid uuid",
+                "type": "type_error.uuid"
+            }
+        ]
+    }
+
+
+def test_initialize_store_non_exist_user(client: TestClient):
+    user_id = "65761879-19ec-45ac-8d3d-41b477bf134b"
+    json = {
+        "name": "NoNutNovember",
+    }
+    response = client.put(f"/api/store/{user_id}", json=json)
+
+    assert response.status_code == 400
+    assert response.json() == {
+        "detail": "Cannot initialize an store that does not exist"
     }
