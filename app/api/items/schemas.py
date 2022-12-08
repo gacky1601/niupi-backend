@@ -14,3 +14,7 @@ class Item(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class ItemPhoto(BaseModel):
+    photo_ids: list[UUID4]
