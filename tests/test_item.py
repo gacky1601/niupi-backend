@@ -91,7 +91,7 @@ def test_delete_item_by_id(client: TestClient):
     }
 
 
-def test_delete_item_by_id_not_exist(client: TestClient):
+def test_delete_item_by_empty_item_id_string(client: TestClient):
     item_id = ""
 
     response = client.delete(f"/api/items/{item_id}")
