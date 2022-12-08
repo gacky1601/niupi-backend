@@ -46,6 +46,17 @@ def initialize_item_test_data(database: Session):
 
     database.add(photo)
 
+    item = Item(
+        id="0df1dacb-67f6-495c-b993-49d06a293789",
+        name="marker",
+        description="so many water",
+        price=500,
+        store_id="49b2b69a-512c-4492-a5ea-50633893f8cc",
+        inventory=50
+    )
+
+    database.add(item)
+
 
 def initialize_user_test_data(database: Session):
     password = "a".encode("utf-8")
