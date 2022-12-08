@@ -46,6 +46,35 @@ def initialize_item_test_data(database: Session):
 
     database.add(photo)
 
+    item = Item(
+        id="16c9a2d0-2f3d-4730-8e30-d4232366d2c4",
+        name="pain",
+        description="so painful",
+        price=690,
+        store_id="49b2b69a-512c-4492-a5ea-50633893f8cc",
+        inventory=50
+    )
+
+    database.add(item)
+
+    photo = ItemPhoto(
+        id="2a906e72-7604-11ed-a1eb-0242ac120002",
+        item_id="16c9a2d0-2f3d-4730-8e30-d4232366d2c4"
+    )
+
+    database.add(photo)
+
+    item = Item(
+        id="16c9a2d0-2f3d-4730-8e30-d4232366d2c8",
+        name="No Photo",
+        description="there is no photo my friend",
+        price=690,
+        store_id="49b2b69a-512c-4492-a5ea-50633893f8cc",
+        inventory=50
+    )
+
+    database.add(item)
+
 
 def initialize_user_test_data(database: Session):
     password = "a".encode("utf-8")
@@ -93,17 +122,6 @@ def reset_db():
     db.add(user1)
 
     initialize_item_test_data(db)
-
-    item1 = Item(
-        id="16c9a2d0-2f3d-4730-8e30-d4232366d2c4",
-        name="pain",
-        description="so painful",
-        price=690,
-        store_id="49b2b69a-512c-4492-a5ea-50633893f8cc",
-        inventory=50
-    )
-
-    db.add(item1)
 
     db.commit()
     db.close()
