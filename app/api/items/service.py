@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 from pydantic import UUID4
 
 from .models import Item, ItemPhoto
+from .exceptions import ItemNotFound
 
 
 def get_item_by_item_id(db: Session, item_id: UUID4):
@@ -20,6 +21,5 @@ def get_item_by_item_id(db: Session, item_id: UUID4):
 
 
 def delete_item_by_item_id(db: Session, item_id: UUID4):
-    db.query(Item).get(item_id).delete()
-
+    db.query(Item).filter(Item.id == item_id).delete()
     db.commit()
