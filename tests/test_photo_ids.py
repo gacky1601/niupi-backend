@@ -7,12 +7,10 @@ def test_get_photos_by_item_id(client: TestClient):
     response = client.get(f"/api/items/{item_id}/photos")
 
     assert response.status_code == 200
-    assert response.json() == {
-        "photo_ids": [
-            "002891b5-6019-4144-b174-9aaaf8095063",
-            "f5832ea6-4c3c-48f0-8bd6-72ebd8754758"
-        ]
-    }
+    assert response.json() == [
+        "002891b5-6019-4144-b174-9aaaf8095063",
+        "f5832ea6-4c3c-48f0-8bd6-72ebd8754758"
+    ]
 
 
 def test_get_photo_by_item_id_not_found(client: TestClient):
