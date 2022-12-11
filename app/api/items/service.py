@@ -1,6 +1,9 @@
 from sqlalchemy.orm import Session
 from pydantic import UUID4
 
+from .models import Item
+from .schemas import ItemUpdate
+
 
 def get_item_by_item_id(db: Session, item_id: UUID4):
     statement = (
@@ -15,3 +18,13 @@ def get_item_by_item_id(db: Session, item_id: UUID4):
     )
 
     return db.execute(statement).first()
+
+
+def update_item(db: Session, item_id: UUID4, payload: ItemUpdate):
+    db.query(Item) \
+      .filter(Item.id == item_id) \
+      .update(payload.dict(exclude_none=True), synchronize_session="fetch")
+    db.commit()
+
+    updated_item = get_item_by_item_id(db, item_id)
+    return updated_item
