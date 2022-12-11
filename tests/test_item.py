@@ -125,7 +125,7 @@ def test_update_item_id_is_empty_string(client: TestClient):
     response = client.patch(f"/api/items/{item_id}")
     assert response.status_code == 404
     assert response.json() == {
-        'detail':  "Not Found"
+        'detail': "Not Found"
     }
 
 
