@@ -3,10 +3,10 @@ from uuid import UUID
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
+from . import service
 from .dependencies import get_db, validate_item_id
 from .exceptions import ItemNotFound
 from .schemas import Item, ItemUpdate
-from . import service
 
 
 router = APIRouter()

@@ -26,7 +26,6 @@ def delete_item_by_item_id(db: Session, item_id: UUID4):
 
 
 def update_item(db: Session, item_id: UUID4, payload: ItemUpdate):
-
     db.query(Item) \
       .filter(Item.id == item_id) \
       .update(payload.dict(exclude_none=True), synchronize_session="fetch")
