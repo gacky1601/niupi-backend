@@ -75,3 +75,123 @@ def test_get_item_by_item_id_item_id_has_strip_whitespaces(client: TestClient):
             }
         ]
     }
+
+
+def test_update_item(client: TestClient):
+    item_id = "0df1dacb-67f6-495c-b993-49d06a293787"
+
+    json = {
+        "name": "newitem",
+        "description": "no water",
+        "price": 5000,
+        "inventory": 10,
+    }
+
+    response = client.patch(f"/api/items/{item_id}", json=json)
+
+    assert response.json() == {
+        "id": "0df1dacb-67f6-495c-b993-49d06a293787",
+        "name": "newitem",
+        "description": "no water",
+        "price": 5000,
+        "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
+        "inventory": 10,
+        "photo_ids": [
+            "002891b5-6019-4144-b174-9aaaf8095063",
+            "f5832ea6-4c3c-48f0-8bd6-72ebd8754758"
+        ]
+    }
+    assert response.status_code == 200
+
+
+def test_update_item_not_exist_item(client: TestClient):
+    item_id = "65761879-19ec-45ac-8d3d-41b477bf134b"
+    json = {
+        "name": "newitem",
+        "description": "no water",
+        "price": 5000,
+        "inventory": 10,
+    }
+    response = client.patch(f"/api/items/{item_id}", json=json)
+    assert response.status_code == 404
+    assert response.json() == {
+        "detail": "Item not found"
+    }
+
+
+def test_update_item_id_is_empty_string(client: TestClient):
+    item_id = ""
+
+    response = client.patch(f"/api/items/{item_id}")
+    assert response.status_code == 404
+    assert response.json() == {
+        'detail': "Not Found"
+    }
+
+
+def test_update_item_id_has_strip_whitespaces(client: TestClient):
+    item_id = " 0df1dacb-67f6-495c-b993-49d06a293787 "
+
+    json = {
+        "name": "newitem",
+        "description": "no water",
+        "price": 5000,
+        "inventory": 10,
+    }
+    response = client.patch(f"/api/items/{item_id}", json=json)
+    assert response.status_code == 422
+    assert response.json() == {
+        'detail': [
+            {
+                'loc': [
+                    'path',
+                    'item_id'
+                ],
+                'msg': 'value is not a valid uuid',
+                'type': 'type_error.uuid'
+            }
+        ]
+    }
+
+
+def test_update_item_invalid_item_id_format(client: TestClient):
+    item_id = "asldijfas>asdfj"
+
+    response = client.get(f"/api/items/{item_id}")
+
+    assert response.status_code == 422
+    assert response.json() == {
+        "detail": [
+            {
+                "loc": ["path", "item_id"],
+                "msg": "value is not a valid uuid",
+                "type": "type_error.uuid"
+            }
+        ]
+    }
+
+
+def test_update_item_not_update_every_column(client: TestClient):
+    item_id = "0df1dacb-67f6-495c-b993-49d06a293787"
+
+    json = {
+        "name": "newitem",
+        "description": "no water",
+        "price": 5000,
+    }
+
+    response = client.patch(f"/api/items/{item_id}", json=json)
+
+    assert response.json() == {
+        "detail": [
+            {
+                'loc': [
+                    'body',
+                    'inventory'
+                ],
+                'msg': 'field required',
+                'type': 'value_error.missing'
+            }
+        ]
+    }
+    assert response.status_code == 422
