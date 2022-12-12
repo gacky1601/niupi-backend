@@ -14,3 +14,10 @@ class Item(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class ItemUpdate(BaseModel):
+    name: constr(min_length=1, strip_whitespace=True)
+    description: Optional[constr(min_length=1, strip_whitespace=True)]
+    price: int
+    inventory: int

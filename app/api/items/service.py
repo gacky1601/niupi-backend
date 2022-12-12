@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from pydantic import UUID4
 
-from .models import Item, ItemPhoto
-from .exceptions import ItemNotFound
+from .models import Item
+from .schemas import ItemUpdate
 
 
 def get_item_by_item_id(db: Session, item_id: UUID4):
@@ -23,3 +23,14 @@ def get_item_by_item_id(db: Session, item_id: UUID4):
 def delete_item_by_item_id(db: Session, item_id: UUID4):
     db.query(Item).filter(Item.id == item_id).delete()
     db.commit()
+
+
+def update_item(db: Session, item_id: UUID4, payload: ItemUpdate):
+
+    db.query(Item) \
+      .filter(Item.id == item_id) \
+      .update(payload.dict(exclude_none=True), synchronize_session="fetch")
+    db.commit()
+
+    updated_item = get_item_by_item_id(db, item_id)
+    return updated_item

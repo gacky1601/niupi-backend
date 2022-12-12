@@ -1,9 +1,13 @@
+from uuid import UUID
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from .dependencies import get_db, validate_item_id
-from .schemas import Item
-from .service import delete_item_by_item_id
+from .exceptions import ItemNotFound
+from .schemas import Item, ItemUpdate
+from . import service
+
 
 router = APIRouter()
 
@@ -13,6 +17,17 @@ def read_item(item: Item = Depends(validate_item_id)):
     return item
 
 
+@router.patch("/{item_id}", response_model=Item)
+def update_item(
+    payload: ItemUpdate,
+    item: Item = Depends(validate_item_id),
+    db: Session = Depends(get_db)
+):
+    updated_item = service.update_item(db, item.id, payload)
+
+    return updated_item
+
+
 @router.delete("/{item_id}", status_code=204)
 def delete_item(item: Item = Depends(validate_item_id), db: Session = Depends(get_db)):
-    delete_item_by_item_id(db, item.id)
+    service.delete_item_by_item_id(db, item.id)
