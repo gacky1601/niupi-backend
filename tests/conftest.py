@@ -103,8 +103,8 @@ def reset_db():
         name="test",
         address="test",
         email="test@gmail.com",
-        cellphone_number="0000000000",
-        telephone_number="0000000000"
+        cellphone_number="0900000000",
+        telephone_number="02-22222222"
     )
 
     db.add(store)
