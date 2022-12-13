@@ -24,15 +24,15 @@ def get_item_by_item_id(database: Session, item_id: UUID4):
 def get_photos_by_item_id(database: Session, item_id: UUID4):
     statement = (
         f"""
-        SELECT array_agg(item_photo.id)
+        SELECT array_agg(id)
         FROM item_photo
-        WHERE item_photo.item_id='{item_id}'
+        WHERE item_id='{item_id}'
         """
     )
 
-    result = database.execute(statement).first()
+    photos = database.execute(statement).scalar()
 
-    return result[0]
+    return photos
 
 
 def delete_item_by_item_id(db: Session, item_id: UUID4):
