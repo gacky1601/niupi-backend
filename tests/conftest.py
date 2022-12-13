@@ -45,6 +45,7 @@ def initialize_item_test_data(database: Session):
     )
 
     database.add(photo)
+
     item = Item(
         id="16c9a2d0-2f3d-4730-8e30-d4232366d2c4",
         name="pain",

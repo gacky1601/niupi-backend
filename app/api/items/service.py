@@ -10,7 +10,7 @@ def get_item_by_item_id(db: Session, item_id: UUID4):
         f"""
         SELECT item.*, array_agg(item_photo.id) as photo_ids
         FROM item
-        JOIN item_photo
+        LEFT JOIN item_photo
         ON item.id=item_photo.item_id
         WHERE item.id='{item_id}'
         GROUP BY item.id
@@ -18,6 +18,11 @@ def get_item_by_item_id(db: Session, item_id: UUID4):
     )
 
     return db.execute(statement).first()
+
+
+def delete_item_by_item_id(db: Session, item_id: UUID4):
+    db.query(Item).filter(Item.id == item_id).delete()
+    db.commit()
 
 
 def update_item(db: Session, item_id: UUID4, payload: ItemUpdate):

@@ -195,3 +195,54 @@ def test_update_item_not_update_every_column(client: TestClient):
         ]
     }
     assert response.status_code == 422
+
+
+def test_delete_item_by_id(client: TestClient):
+    item_id = "16c9a2d0-2f3d-4730-8e30-d4232366d2c4"
+
+    response = client.delete(f"/api/items/{item_id}")
+
+    assert response.status_code == 204
+    response = client.get(f"/api/items/{item_id}")
+
+
+def test_delete_item_by_empty_item_id_string(client: TestClient):
+    item_id = ""
+
+    response = client.delete(f"/api/items/{item_id}")
+
+    assert response.status_code == 404
+    assert response.json() == {
+        "detail": "Not Found"
+    }
+
+
+def test_delete_item_by_id_invalid_item_id_format(client: TestClient):
+    item_id = "asldijfas>asdfj"
+
+    response = client.get(f"/api/items/{item_id}")
+
+    assert response.status_code == 422
+    assert response.json() == {
+        "detail": [
+            {
+                "loc": ["path", "item_id"],
+                "msg": "value is not a valid uuid",
+                "type": "type_error.uuid"
+            }
+        ]
+    }
+
+
+def test_delete_item_by_id_without_photo(client: TestClient):
+    item_id = "16c9a2d0-2f3d-4730-8e30-d4232366d2c8"
+
+    response = client.delete(f"/api/items/{item_id}")
+
+    assert response.status_code == 204
+    response = client.get(f"/api/items/{item_id}")
+
+    assert response.status_code == 404
+    assert response.json() == {
+        "detail": "Item not found"
+    }
