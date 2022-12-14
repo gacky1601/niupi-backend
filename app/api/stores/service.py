@@ -1,10 +1,10 @@
 from uuid import UUID
 
-from sqlalchemy.orm import Session
 from pydantic import UUID4
+from sqlalchemy.orm import Session
 
-from .schemas import StoreInitialize
 from . import models
+from .schemas import StoreInitialize
 
 
 def get_store_by_user_id(db: Session, user_id: UUID):
