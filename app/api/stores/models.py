@@ -1,7 +1,8 @@
-from sqlalchemy import CheckConstraint, Column, String, ForeignKey
-from sqlalchemy.orm import relationship
-from sqlalchemy.dialects.postgresql import UUID
 import uuid
+
+from sqlalchemy import CheckConstraint, Column, ForeignKey, String
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 
 from app.api.items.models import Item
 from app.database import Base
