@@ -7,7 +7,7 @@ from app.utils.validator import cellphone_number_regex, telephone_number_regex
 
 class Store(BaseModel):
     id: UUID4
-    user_id: UUID4
+    seller_id: UUID4
     name: Optional[constr(min_length=1, strip_whitespace=True)]
     address: Optional[constr(min_length=1, strip_whitespace=True)]
     email: Optional[EmailStr]
