@@ -174,7 +174,7 @@ def test_sign_up(client: TestClient):
     response = client.get(f"/api/stores/{user_id}")
     assert response.status_code == 200
     data = response.json()
-    assert data["user_id"] == user_id
+    assert data["seller_id"] == user_id
     assert data["name"] is None
     assert data["email"] is None
     assert data["address"] is None

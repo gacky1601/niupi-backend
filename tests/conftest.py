@@ -94,7 +94,7 @@ def initialize_user_test_data(database: Session):
 def initialize_store_test_data(database: Session):
     store = Store(
         id="49b2b69a-512c-4492-a5ea-50633893f8cc",
-        user_id="0df1dacb-67f6-495c-b993-49d06a293765",
+        seller_id="0df1dacb-67f6-495c-b993-49d06a293765",
         name="test",
         address="test",
         email="test@gmail.com",

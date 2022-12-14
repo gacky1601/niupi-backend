@@ -9,7 +9,7 @@ def test_get_store_by_user_id(client: TestClient):
     assert response.status_code == 200
     assert response.json() == {
         "id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
-        "user_id": "0df1dacb-67f6-495c-b993-49d06a293765",
+        "seller_id": "0df1dacb-67f6-495c-b993-49d06a293765",
         "name": "test",
         "address": "test",
         "email": "test@gmail.com",
@@ -88,7 +88,7 @@ def test_initialize_store(client: TestClient):
     assert response.status_code == 200
     assert response.json() == {
         "id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
-        "user_id": "0df1dacb-67f6-495c-b993-49d06a293765",
+        "seller_id": "0df1dacb-67f6-495c-b993-49d06a293765",
         "name": "NoNutNovember",
         "address": "SanDiego",
         "email": "NNN@gmail.com",
@@ -110,7 +110,7 @@ def test_initialize_store_without_cellphone_number(client: TestClient):
     assert response.status_code == 200
     assert response.json() == {
         "id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
-        "user_id": "0df1dacb-67f6-495c-b993-49d06a293765",
+        "seller_id": "0df1dacb-67f6-495c-b993-49d06a293765",
         "name": "NoNutNovember",
         "address": "SanDiego",
         "email": "NNN@gmail.com",
