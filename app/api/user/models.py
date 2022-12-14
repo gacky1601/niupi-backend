@@ -5,7 +5,7 @@ from sqlalchemy import CheckConstraint
 import uuid
 
 from app.database import Base
-from app.api.store.models import Store
+from app.api.stores.models import Store
 
 
 class Role(Base):

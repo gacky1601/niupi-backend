@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from app.main import app
 from app.database import SessionLocal, initialize_db
 
-from app.api.store.models import Store
+from app.api.stores.models import Store
 from app.api.user.models import User
 from app.api.items.models import Item, ItemPhoto
 

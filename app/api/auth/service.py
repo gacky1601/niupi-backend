@@ -1,7 +1,7 @@
 import bcrypt
 from sqlalchemy.orm import Session
 
-from app.api.store.models import Store
+from app.api.stores.models import Store
 from .models import User
 from . import schemas
 
