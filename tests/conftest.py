@@ -91,12 +91,7 @@ def initialize_user_test_data(database: Session):
     database.add(user)
 
 
-@pytest.fixture(autouse=True)
-def reset_db():
-    initialize_db()
-
-    db = SessionLocal()
-
+def initialize_store_test_data(database: Session):
     store = Store(
         id="49b2b69a-512c-4492-a5ea-50633893f8cc",
         user_id="0df1dacb-67f6-495c-b993-49d06a293765",
@@ -107,9 +102,17 @@ def reset_db():
         telephone_number="02-22222222"
     )
 
-    db.add(store)
+    database.add(store)
+
+
+@pytest.fixture(autouse=True)
+def reset_db():
+    initialize_db()
+
+    db = SessionLocal()
 
     initialize_user_test_data(db)
+    initialize_store_test_data(db)
 
     user1 = User(
         id="66761879-19ec-45ac-8d3d-41b477bf134b",
