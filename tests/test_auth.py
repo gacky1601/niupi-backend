@@ -254,25 +254,14 @@ def test_login(client: TestClient):
     assert response.status_code == 200
 
     data = response.json()
+    assert data["id"] == "0df1dacb-67f6-495c-b993-49d06a293765"
     assert data["email"] == "test@gmail.com"
     assert data["username"] == "test"
     assert data["address"] is None
     assert data["cellphone_number"] is None
     assert data["role_id"] == 0
+    assert data["store_id"] == "49b2b69a-512c-4492-a5ea-50633893f8cc"
     assert "hashed_password" not in data
-    assert "id" in data
-    user_id = data["id"]
-
-    response = client.get(f"/api/user/{user_id}")
-    assert response.status_code == 200
-    data = response.json()
-    assert data["email"] == "test@gmail.com"
-    assert data["username"] == "test"
-    assert data["address"] is None
-    assert data["cellphone_number"] is None
-    assert data["role_id"] == 0
-    assert "hashed_password" not in data
-    assert data["id"] == user_id
 
 
 def test_login_invalid_email(client: TestClient):
