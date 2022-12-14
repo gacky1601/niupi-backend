@@ -22,7 +22,7 @@ def create_user(db: Session, user: schemas.UserCreate):
     )
 
     new_store = Store(
-        user_id=new_user.id
+        seller_id=new_user.id
     )
 
     new_user.store = new_store
