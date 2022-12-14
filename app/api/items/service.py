@@ -1,11 +1,13 @@
-from sqlalchemy.orm import Session
 from pydantic import UUID4
+from sqlalchemy import func
+from sqlalchemy.dialects.postgresql import ARRAY, UUID
+from sqlalchemy.orm import Session
 
-from .models import Item
+from .models import Item, ItemPhoto
 from .schemas import ItemUpdate
 
 
-def get_item_by_item_id(db: Session, item_id: UUID4):
+def get_item_by_item_id(database: Session, item_id: UUID4):
     statement = (
         f"""
         SELECT item.*, array_agg(item_photo.id) as photo_ids
@@ -16,8 +18,21 @@ def get_item_by_item_id(db: Session, item_id: UUID4):
         GROUP BY item.id
         """
     )
+    return database.execute(statement).first()
 
-    return db.execute(statement).first()
+
+def get_photos_by_item_id(database: Session, item_id: UUID4):
+    statement = (
+        f"""
+        SELECT array_agg(id)
+        FROM item_photo
+        WHERE item_id='{item_id}'
+        """
+    )
+
+    photos = database.execute(statement).scalar()
+
+    return photos
 
 
 def delete_item_by_item_id(db: Session, item_id: UUID4):
