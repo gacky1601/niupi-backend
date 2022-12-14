@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
 from pydantic import UUID4
+from sqlalchemy.orm import Session
 
-from .schemas import Store, StoreInitialize
 from . import service
 from .dependencies import get_db
-from .exceptions import StoreNotFound, InitializeNonExistingStore
+from .exceptions import InitializeNonExistingStore, StoreNotFound
+from .schemas import Store, StoreInitialize
 
 router = APIRouter()
 
