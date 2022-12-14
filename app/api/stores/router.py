@@ -11,8 +11,8 @@ router = APIRouter()
 
 
 @router.get("/{user_id}", response_model=Store)
-def read_store(user_id: UUID4, db: Session = Depends(get_db)):
-    store = service.get_store_by_user_id(db, user_id)
+def read_store(user_id: UUID4, database: Session = Depends(get_db)):
+    store = service.get_store_by_user_id(database, user_id)
 
     if store is None:
         raise StoreNotFound
@@ -21,12 +21,12 @@ def read_store(user_id: UUID4, db: Session = Depends(get_db)):
 
 
 @router.put("/{owner_id}", response_model=Store)
-def initialize_store(owner_id: UUID4, store: StoreInitialize, db: Session = Depends(get_db)):
-    seller = service.get_store_by_user_id(db, owner_id)
+def initialize_store(owner_id: UUID4, store: StoreInitialize, database: Session = Depends(get_db)):
+    seller = service.get_store_by_user_id(database, owner_id)
 
     if seller is None:
         raise InitializeNonExistingStore
 
-    initialized_store = service.initialize_store(db, owner_id, store)
+    initialized_store = service.initialize_store(database, owner_id, store)
 
     return initialized_store
