@@ -4,7 +4,7 @@ from fastapi.testclient import TestClient
 def test_get_store_by_user_id(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
 
-    response = client.get(f"/api/store/{user_id}")
+    response = client.get(f"/api/stores/{user_id}")
 
     assert response.status_code == 200
     assert response.json() == {
@@ -21,7 +21,7 @@ def test_get_store_by_user_id(client: TestClient):
 def test_get_store_by_user_id_store_not_found(client: TestClient):
     user_id = "65761879-19ec-45ac-8d3d-41b477bf134b"
 
-    response = client.get(f"/api/store/{user_id}")
+    response = client.get(f"/api/stores/{user_id}")
 
     assert response.status_code == 404
     assert response.json() == {
@@ -32,7 +32,7 @@ def test_get_store_by_user_id_store_not_found(client: TestClient):
 def test_get_store_by_user_id_user_id_empty(client: TestClient):
     user_id = ""
 
-    response = client.get(f"/api/store/{user_id}")
+    response = client.get(f"/api/stores/{user_id}")
 
     assert response.status_code == 404
     assert response.json() == {
@@ -43,7 +43,7 @@ def test_get_store_by_user_id_user_id_empty(client: TestClient):
 def test_get_store_by_user_id_invalid_user_id_format(client: TestClient):
     user_id = "asldijfas>asdfj"
 
-    response = client.get(f"/api/store/{user_id}")
+    response = client.get(f"/api/stores/{user_id}")
 
     assert response.status_code == 422
     assert response.json() == {
@@ -60,7 +60,7 @@ def test_get_store_by_user_id_invalid_user_id_format(client: TestClient):
 def test_get_store_by_user_id_user_id_has_strip_whitespaces(client: TestClient):
     user_id = " 0df1dacb-67f6-495c-b993-49d06a293765 "
 
-    response = client.get(f"/api/store/{user_id}")
+    response = client.get(f"/api/stores/{user_id}")
 
     assert response.status_code == 422
     assert response.json() == {
@@ -83,7 +83,7 @@ def test_initialize_store(client: TestClient):
         "cellphone_number": "0987654321",
         "telephone_number": "02-22542120"
     }
-    response = client.put(f"/api/store/{user_id}", json=json)
+    response = client.put(f"/api/stores/{user_id}", json=json)
 
     assert response.status_code == 200
     assert response.json() == {
@@ -105,7 +105,7 @@ def test_initialize_store_without_cellphone_number(client: TestClient):
         "address": "SanDiego",
         "telephone_number": "02-22542120",
     }
-    response = client.put(f"/api/store/{user_id}", json=json)
+    response = client.put(f"/api/stores/{user_id}", json=json)
 
     assert response.status_code == 200
     assert response.json() == {
@@ -124,7 +124,7 @@ def test_initialize_store_with_empty_name(client: TestClient):
     json = {
         "name": "",
     }
-    response = client.put(f"/api/store/{user_id}", json=json)
+    response = client.put(f"/api/stores/{user_id}", json=json)
 
     assert response.status_code == 422
     assert response.json() == {
@@ -149,7 +149,7 @@ def test_initialize_store_with_invalid_email(client: TestClient):
     json = {
         "email": "NNNgmail.com",
     }
-    response = client.put(f"/api/store/{user_id}", json=json)
+    response = client.put(f"/api/stores/{user_id}", json=json)
 
     assert response.status_code == 422
     assert response.json() == {
@@ -171,7 +171,7 @@ def test_initialize_store_with_invalid_cellphone_number(client: TestClient):
     json = {
         "cellphone_number": "8888",
     }
-    response = client.put(f"/api/store/{user_id}", json=json)
+    response = client.put(f"/api/stores/{user_id}", json=json)
 
     assert response.status_code == 422
     assert response.json() == {
@@ -191,7 +191,7 @@ def test_initialize_store_with_invalid_telephone_number(client: TestClient):
     json = {
         "telephone_number": "4444",
     }
-    response = client.put(f"/api/store/{user_id}", json=json)
+    response = client.put(f"/api/stores/{user_id}", json=json)
 
     assert response.status_code == 422
     assert response.json() == {
@@ -211,7 +211,7 @@ def test_initialize_store_with_invalid_owner_id(client: TestClient):
     json = {
         "name": "NoNutNovember",
     }
-    response = client.put(f"/api/store/{user_id}", json=json)
+    response = client.put(f"/api/stores/{user_id}", json=json)
 
     assert response.status_code == 422
     assert response.json() == {
@@ -230,7 +230,7 @@ def test_initialize_store_non_exist_user(client: TestClient):
     json = {
         "name": "NoNutNovember",
     }
-    response = client.put(f"/api/store/{user_id}", json=json)
+    response = client.put(f"/api/stores/{user_id}", json=json)
 
     assert response.status_code == 400
     assert response.json() == {
