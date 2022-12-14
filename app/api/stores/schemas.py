@@ -1,6 +1,7 @@
 from typing import Optional
 
-from pydantic import BaseModel, EmailStr, UUID4, constr
+from pydantic import UUID4, BaseModel, EmailStr, constr
+
 from app.utils.validator import cellphone_number_regex, telephone_number_regex
 
 
