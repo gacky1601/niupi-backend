@@ -27,6 +27,6 @@ def update_store(owner_id: UUID4, store: StoreInitialize, database: Session = De
     if seller is None:
         raise InitializeNonExistingStore
 
-    initialized_store = service.update_store(database, owner_id, store)
+    updated_store = service.update_store(database, owner_id, store)
 
-    return initialized_store
+    return updated_store
