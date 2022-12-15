@@ -14,16 +14,13 @@ class Store(Base):
 
     __table_args__ = (
         CheckConstraint(
-            f"REGEXP_LIKE(cellphone_number,'{cellphone_number_regex}')",
-            name='cellphone_numbercheck'
+            f"cellphone_number ~* '{cellphone_number_regex}'", name='cellphone_number_check'
         ),
         CheckConstraint(
-            f"REGEXP_LIKE(email,'{email_regex}')",
-            name='emailcheck'
+            f"email ~* '{email_regex}'", name='emailcheck'
         ),
         CheckConstraint(
-            f"REGEXP_LIKE(telephone_number,'{telephone_number_regex}')",
-            name='telephone_numbercheck'
+            f"telephone_number ~* '{telephone_number_regex}'", name='telephone_number_check'
         )
     )
 
