@@ -83,7 +83,7 @@ def test_update_store(client: TestClient):
         "cellphone_number": "0987654321",
         "telephone_number": "02-22542120"
     }
-    response = client.put(f"/api/stores/{seller_id}", json=json)
+    response = client.patch(f"/api/stores/{seller_id}", json=json)
 
     assert response.status_code == 200
     assert response.json() == {
@@ -105,7 +105,7 @@ def test_update_store_without_cellphone_number(client: TestClient):
         "address": "SanDiego",
         "telephone_number": "02-22542120",
     }
-    response = client.put(f"/api/stores/{seller_id}", json=json)
+    response = client.patch(f"/api/stores/{seller_id}", json=json)
 
     assert response.status_code == 200
     assert response.json() == {
@@ -124,7 +124,7 @@ def test_update_store_with_empty_name(client: TestClient):
     json = {
         "name": "",
     }
-    response = client.put(f"/api/stores/{seller_id}", json=json)
+    response = client.patch(f"/api/stores/{seller_id}", json=json)
 
     assert response.status_code == 422
     assert response.json() == {
@@ -149,7 +149,7 @@ def test_update_store_with_invalid_email(client: TestClient):
     json = {
         "email": "NNNgmail.com",
     }
-    response = client.put(f"/api/stores/{seller_id}", json=json)
+    response = client.patch(f"/api/stores/{seller_id}", json=json)
 
     assert response.status_code == 422
     assert response.json() == {
@@ -171,7 +171,7 @@ def test_update_store_with_invalid_cellphone_number(client: TestClient):
     json = {
         "cellphone_number": "8888",
     }
-    response = client.put(f"/api/stores/{seller_id}", json=json)
+    response = client.patch(f"/api/stores/{seller_id}", json=json)
 
     assert response.status_code == 422
     assert response.json() == {
@@ -191,7 +191,7 @@ def test_update_store_with_invalid_telephone_number(client: TestClient):
     json = {
         "telephone_number": "4444",
     }
-    response = client.put(f"/api/stores/{seller_id}", json=json)
+    response = client.patch(f"/api/stores/{seller_id}", json=json)
 
     assert response.status_code == 422
     assert response.json() == {
@@ -211,7 +211,7 @@ def test_update_store_with_invalid_seller_id(client: TestClient):
     json = {
         "name": "NoNutNovember",
     }
-    response = client.put(f"/api/stores/{seller_id}", json=json)
+    response = client.patch(f"/api/stores/{seller_id}", json=json)
 
     assert response.status_code == 422
     assert response.json() == {
@@ -230,7 +230,7 @@ def test_update_store_non_exist_user(client: TestClient):
     json = {
         "name": "NoNutNovember",
     }
-    response = client.put(f"/api/stores/{seller_id}", json=json)
+    response = client.patch(f"/api/stores/{seller_id}", json=json)
 
     assert response.status_code == 400
     assert response.json() == {
