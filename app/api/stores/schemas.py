@@ -18,7 +18,7 @@ class Store(BaseModel):
         orm_mode = True
 
 
-class StoreInitialize(BaseModel):
+class StoreUpdate(BaseModel):
     name: Optional[constr(min_length=1, strip_whitespace=True)]
     address: Optional[constr(min_length=1, strip_whitespace=True)]
     email: Optional[EmailStr]
