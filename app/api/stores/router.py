@@ -20,7 +20,7 @@ def read_store(seller_id: UUID4, database: Session = Depends(get_db)):
     return store
 
 
-@router.put("/{seller_id}", response_model=Store)
+@router.patch("/{seller_id}", response_model=Store)
 def update_store(seller_id: UUID4, store: StoreUpdate, database: Session = Depends(get_db)):
     seller = service.get_store_by_user_id(database, seller_id)
 
