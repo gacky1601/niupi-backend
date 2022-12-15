@@ -22,10 +22,10 @@ class User(Base):
 
     __table_args__ = (
         CheckConstraint(
-            f"cellphone_number ~* '{cellphone_number_regex}'", name='cellphone_number_check'
+            f"cellphone_number ~* '{cellphone_number_regex}'", name="cellphone_number_check"
         ),
         CheckConstraint(
-            f"email ~* '{email_regex}'", name='emailcheck'
+            f"email ~* '{email_regex}'", name="email_check"
         )
     )
 
