@@ -206,7 +206,7 @@ def test_update_store_with_invalid_telephone_number(client: TestClient):
     }
 
 
-def test_update_store_with_invalid_owner_id(client: TestClient):
+def test_update_store_with_invalid_seller_id(client: TestClient):
     seller_id = "qwerasdf"
     json = {
         "name": "NoNutNovember",
@@ -217,7 +217,7 @@ def test_update_store_with_invalid_owner_id(client: TestClient):
     assert response.json() == {
         "detail": [
             {
-                "loc": ["path", "owner_id"],
+                "loc": ["path", "seller_id"],
                 "msg": "value is not a valid uuid",
                 "type": "type_error.uuid"
             }
