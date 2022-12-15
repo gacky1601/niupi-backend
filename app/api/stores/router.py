@@ -20,13 +20,13 @@ def read_store(seller_id: UUID4, database: Session = Depends(get_db)):
     return store
 
 
-@router.put("/{owner_id}", response_model=Store)
-def update_store(owner_id: UUID4, store: StoreInitialize, database: Session = Depends(get_db)):
-    seller = service.get_store_by_user_id(database, owner_id)
+@router.put("/{seller_id}", response_model=Store)
+def update_store(seller_id: UUID4, store: StoreInitialize, database: Session = Depends(get_db)):
+    seller = service.get_store_by_user_id(database, seller_id)
 
     if seller is None:
         raise InitializeNonExistingStore
 
-    updated_store = service.update_store(database, owner_id, store)
+    updated_store = service.update_store(database, seller_id, store)
 
     return updated_store
