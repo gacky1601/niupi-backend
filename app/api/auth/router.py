@@ -1,11 +1,11 @@
+import bcrypt
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-import bcrypt
-from .service import create_user, get_user_by_email
-from .schemas import UserCreate, UserLogin
+
 from .dependencies import get_db
 from .exceptions import EmailExists, InvalidEmailOrPassword
-from app.api.user.schemas import User
+from .schemas import LoginResponse, User, UserCreate, UserLogin
+from .service import create_user, get_user_by_email
 
 router = APIRouter()
 
@@ -20,7 +20,7 @@ def sign_up(user: UserCreate, db: Session = Depends(get_db)):
     return create_user(db, user)
 
 
-@router.get('/login', response_model=User)
+@router.get('/login', response_model=LoginResponse)
 def sing_in(user: UserLogin, db: Session = Depends(get_db)):
     db_user = get_user_by_email(db, user.email)
 

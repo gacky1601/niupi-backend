@@ -6,8 +6,18 @@ from .models import User
 from . import schemas
 
 
-def get_user_by_email(db: Session, email: str):
-    return db.query(User).filter(User.email == email).first()
+def get_user_by_email(database: Session, email: str):
+    statement = (
+        f"""
+        SELECT users.*, store.id AS store_id
+        FROM users
+        JOIN store
+        ON users.id=store.user_id
+        WHERE users.email='{email}'
+        """
+    )
+
+    return database.execute(statement).first()
 
 
 def create_user(db: Session, user: schemas.UserCreate):
