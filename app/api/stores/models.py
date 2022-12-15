@@ -44,4 +44,4 @@ class Store(Base):
 
     seller = relationship("User", back_populates="store", cascade_backrefs=True)
 
-    item = relationship("Item")
+    items = relationship("Item")
