@@ -225,14 +225,14 @@ def test_update_store_with_invalid_seller_id(client: TestClient):
     }
 
 
-def test_update_store_non_exist_user(client: TestClient):
+def test_update_store_non_exist_seller(client: TestClient):
     seller_id = "65761879-19ec-45ac-8d3d-41b477bf134b"
     json = {
         "name": "NoNutNovember",
     }
     response = client.patch(f"/api/stores/{seller_id}", json=json)
 
-    assert response.status_code == 400
+    assert response.status_code == 404
     assert response.json() == {
-        "detail": "Cannot initialize an store that does not exist"
+        "detail": "Seller not found"
     }
