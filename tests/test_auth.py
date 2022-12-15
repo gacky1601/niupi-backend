@@ -171,10 +171,10 @@ def test_sign_up(client: TestClient):
     assert "hashed_password" not in data
     assert data["id"] == user_id
 
-    response = client.get(f"/api/store/{user_id}")
+    response = client.get(f"/api/stores/{user_id}")
     assert response.status_code == 200
     data = response.json()
-    assert data["user_id"] == user_id
+    assert data["seller_id"] == user_id
     assert data["name"] is None
     assert data["email"] is None
     assert data["address"] is None

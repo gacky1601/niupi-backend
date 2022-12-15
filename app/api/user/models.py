@@ -5,7 +5,7 @@ from sqlalchemy import CheckConstraint
 import uuid
 
 from app.database import Base
-from app.api.store.models import Store
+from app.api.stores.models import Store
 
 
 class Role(Base):
@@ -29,7 +29,7 @@ class User(Base):
 
     store = relationship(
         "Store",
-        back_populates="user",
+        back_populates="seller",
         uselist=False,
         cascade="all, delete",
         passive_deletes=True

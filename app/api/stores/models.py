@@ -1,7 +1,8 @@
-from sqlalchemy import CheckConstraint, Column, String, ForeignKey
-from sqlalchemy.orm import relationship
-from sqlalchemy.dialects.postgresql import UUID
 import uuid
+
+from sqlalchemy import CheckConstraint, Column, ForeignKey, String
+from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.orm import relationship
 
 from app.api.items.models import Item
 from app.database import Base
@@ -28,7 +29,7 @@ class Store(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
 
-    user_id = Column(
+    seller_id = Column(
         UUID(as_uuid=True),
         ForeignKey("users.id", ondelete="CASCADE"),
         unique=True,
@@ -41,6 +42,6 @@ class Store(Base):
     cellphone_number = Column(String)
     telephone_number = Column(String)
 
-    user = relationship("User", back_populates="store", cascade_backrefs=True)
+    seller = relationship("User", back_populates="store", cascade_backrefs=True)
 
-    item = relationship("Item")
+    items = relationship("Item")

@@ -1,7 +1,7 @@
 import bcrypt
 from sqlalchemy.orm import Session
 
-from app.api.store.models import Store
+from app.api.stores.models import Store
 from .models import User
 from . import schemas
 
@@ -22,7 +22,7 @@ def create_user(db: Session, user: schemas.UserCreate):
     )
 
     new_store = Store(
-        user_id=new_user.id
+        seller_id=new_user.id
     )
 
     new_user.store = new_store
