@@ -1,6 +1,6 @@
 from fastapi import HTTPException, status
 
-SellerNotFound = HTTPException(
+StoreNotFound = HTTPException(
     status_code=status.HTTP_404_NOT_FOUND,
-    detail="Seller not found"
+    detail="Store not found"
 )
