@@ -10,9 +10,9 @@ from .schemas import Store, StoreInitialize
 router = APIRouter()
 
 
-@router.get("/{user_id}", response_model=Store)
-def read_store(user_id: UUID4, database: Session = Depends(get_db)):
-    store = service.get_store_by_user_id(database, user_id)
+@router.get("/{seller_id}", response_model=Store)
+def read_store(seller_id: UUID4, database: Session = Depends(get_db)):
+    store = service.get_store_by_user_id(database, seller_id)
 
     if store is None:
         raise StoreNotFound
