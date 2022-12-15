@@ -12,7 +12,7 @@ def get_user_by_email(database: Session, email: str):
         SELECT users.*, store.id AS store_id
         FROM users
         JOIN store
-        ON users.id=store.user_id
+        ON users.id=store.seller_id
         WHERE users.email='{email}'
         """
     )
