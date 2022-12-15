@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 from . import service
 from .dependencies import get_db
-from .exceptions import InitializeNonExistingStore, StoreNotFound
+from .exceptions import StoreNotFound
 from .schemas import Store, StoreUpdate
 
 router = APIRouter()
@@ -25,7 +25,7 @@ def update_store(seller_id: UUID4, store: StoreUpdate, database: Session = Depen
     seller = service.get_store_by_user_id(database, seller_id)
 
     if seller is None:
-        raise InitializeNonExistingStore
+        raise StoreNotFound
 
     updated_store = service.update_store(database, seller_id, store)
 
