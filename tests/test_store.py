@@ -18,14 +18,14 @@ def test_get_store_by_seller_id(client: TestClient):
     }
 
 
-def test_get_store_by_seller_id_store_not_found(client: TestClient):
+def test_get_store_by_seller_id_seller_not_found(client: TestClient):
     seller_id = "65761879-19ec-45ac-8d3d-41b477bf134b"
 
     response = client.get(f"/api/stores/{seller_id}")
 
     assert response.status_code == 404
     assert response.json() == {
-        "detail": "There is no store owned by this user"
+        "detail": "Seller not found"
     }
 
 
