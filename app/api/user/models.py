@@ -4,8 +4,9 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy import CheckConstraint
 import uuid
 
-from app.database import Base
 from app.api.stores.models import Store
+from app.database import Base
+from app.utils.validator import cellphone_number_regex, email_regex
 
 
 class Role(Base):
@@ -18,6 +19,15 @@ class Role(Base):
 
 class User(Base):
     __tablename__ = "users"
+
+    __table_args__ = (
+        CheckConstraint(
+            f"cellphone_number ~* '{cellphone_number_regex}'", name="cellphone_number_check"
+        ),
+        CheckConstraint(
+            f"email ~* '{email_regex}'", name="email_check"
+        )
+    )
 
     id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
     email = Column(String, unique=True, index=True, nullable=False)
@@ -34,14 +44,3 @@ class User(Base):
         cascade="all, delete",
         passive_deletes=True
     )
-
-
-CheckConstraint(
-    "REGEXP_LIKE(email,'^[a-zA-Z0-9]+@+[a-zA-Z0-9-]+.+([a-zA-Z]{2,4})$')",
-    name='emailcheck'
-)
-
-CheckConstraint(
-    "REGEXP_LIKE(cellphone_number,'^09+([0-9]{8})$')",
-    name='cellphone_numbercheck'
-)
