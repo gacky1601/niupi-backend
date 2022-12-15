@@ -74,7 +74,7 @@ def test_get_store_by_user_id_user_id_has_strip_whitespaces(client: TestClient):
     }
 
 
-def test_initialize_store(client: TestClient):
+def test_update_store(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
     json = {
         "name": "NoNutNovember",
@@ -97,7 +97,7 @@ def test_initialize_store(client: TestClient):
     }
 
 
-def test_initialize_store_without_cellphone_number(client: TestClient):
+def test_update_store_without_cellphone_number(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
     json = {
         "name": "NoNutNovember",
@@ -119,7 +119,7 @@ def test_initialize_store_without_cellphone_number(client: TestClient):
     }
 
 
-def test_initialize_store_with_empty_name(client: TestClient):
+def test_update_store_with_empty_name(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
     json = {
         "name": "",
@@ -144,7 +144,7 @@ def test_initialize_store_with_empty_name(client: TestClient):
     }
 
 
-def test_initialize_store_with_invalid_email(client: TestClient):
+def test_update_store_with_invalid_email(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
     json = {
         "email": "NNNgmail.com",
@@ -166,7 +166,7 @@ def test_initialize_store_with_invalid_email(client: TestClient):
     }
 
 
-def test_initialize_store_with_invalid_cellphone_number(client: TestClient):
+def test_update_store_with_invalid_cellphone_number(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
     json = {
         "cellphone_number": "8888",
@@ -186,7 +186,7 @@ def test_initialize_store_with_invalid_cellphone_number(client: TestClient):
     }
 
 
-def test_initialize_store_with_invalid_telephone_number(client: TestClient):
+def test_update_store_with_invalid_telephone_number(client: TestClient):
     user_id = "0df1dacb-67f6-495c-b993-49d06a293765"
     json = {
         "telephone_number": "4444",
@@ -206,7 +206,7 @@ def test_initialize_store_with_invalid_telephone_number(client: TestClient):
     }
 
 
-def test_initialize_store_with_invalid_owner_id(client: TestClient):
+def test_update_store_with_invalid_owner_id(client: TestClient):
     user_id = "qwerasdf"
     json = {
         "name": "NoNutNovember",
@@ -225,7 +225,7 @@ def test_initialize_store_with_invalid_owner_id(client: TestClient):
     }
 
 
-def test_initialize_store_non_exist_user(client: TestClient):
+def test_update_store_non_exist_user(client: TestClient):
     user_id = "65761879-19ec-45ac-8d3d-41b477bf134b"
     json = {
         "name": "NoNutNovember",
