@@ -29,7 +29,7 @@ class User(Base):
 
     store = relationship(
         "Store",
-        back_populates="user",
+        back_populates="seller",
         uselist=False,
         cascade="all, delete",
         passive_deletes=True
