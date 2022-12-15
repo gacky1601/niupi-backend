@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 from . import service
 from .dependencies import get_db
-from .exceptions import StoreNotFound
+from .exceptions import SellerNotFound
 from .schemas import Store, StoreUpdate
 
 router = APIRouter()
@@ -15,7 +15,7 @@ def read_store(seller_id: UUID4, database: Session = Depends(get_db)):
     store = service.get_store_by_user_id(database, seller_id)
 
     if store is None:
-        raise StoreNotFound
+        raise SellerNotFound
 
     return store
 
@@ -25,7 +25,7 @@ def update_store(seller_id: UUID4, store: StoreUpdate, database: Session = Depen
     seller = service.get_store_by_user_id(database, seller_id)
 
     if seller is None:
-        raise StoreNotFound
+        raise SellerNotFound
 
     updated_store = service.update_store(database, seller_id, store)
 
