@@ -160,20 +160,30 @@ def test_sign_up(client: TestClient):
     assert "id" in data
     user_id = data["id"]
 
-    response = client.get(f"/api/user/{user_id}")
+    json = {
+        "email": "justYu@gamil.com",
+        "password": "test",
+    }
+
+    response = client.get("/api/auth/login", json=json)
+
     assert response.status_code == 200
+
     data = response.json()
+    assert data["id"] == user_id
     assert data["email"] == "justYu@gamil.com"
     assert data["username"] == "yu"
     assert data["address"] is None
     assert data["cellphone_number"] is None
     assert data["role_id"] == 0
+    assert "store_id" in data
+    store_id = data["store_id"]
     assert "hashed_password" not in data
-    assert data["id"] == user_id
 
-    response = client.get(f"/api/stores/{user_id}")
+    response = client.get(f"/api/stores/{store_id}")
     assert response.status_code == 200
     data = response.json()
+    assert data["id"] == store_id
     assert data["seller_id"] == user_id
     assert data["name"] is None
     assert data["email"] is None

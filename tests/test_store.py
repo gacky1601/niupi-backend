@@ -1,10 +1,10 @@
 from fastapi.testclient import TestClient
 
 
-def test_get_store_by_seller_id(client: TestClient):
-    seller_id = "0df1dacb-67f6-495c-b993-49d06a293765"
+def test_get_store_by_store_id(client: TestClient):
+    store_id = "49b2b69a-512c-4492-a5ea-50633893f8cc"
 
-    response = client.get(f"/api/stores/{seller_id}")
+    response = client.get(f"/api/stores/{store_id}")
 
     assert response.status_code == 200
     assert response.json() == {
@@ -18,21 +18,21 @@ def test_get_store_by_seller_id(client: TestClient):
     }
 
 
-def test_get_store_by_seller_id_seller_not_found(client: TestClient):
-    seller_id = "65761879-19ec-45ac-8d3d-41b477bf134b"
+def test_get_store_by_store_id_store_not_found(client: TestClient):
+    store_id = "65761879-19ec-45ac-8d3d-41b477bf134b"
 
-    response = client.get(f"/api/stores/{seller_id}")
+    response = client.get(f"/api/stores/{store_id}")
 
     assert response.status_code == 404
     assert response.json() == {
-        "detail": "Seller not found"
+        "detail": "Store not found"
     }
 
 
-def test_get_store_by_seller_id_seller_id_empty(client: TestClient):
-    seller_id = ""
+def test_get_store_by_store_id_store_id_empty(client: TestClient):
+    store_id = ""
 
-    response = client.get(f"/api/stores/{seller_id}")
+    response = client.get(f"/api/stores/{store_id}")
 
     assert response.status_code == 404
     assert response.json() == {
@@ -40,16 +40,16 @@ def test_get_store_by_seller_id_seller_id_empty(client: TestClient):
     }
 
 
-def test_get_store_by_seller_id_invalid_seller_id_format(client: TestClient):
-    seller_id = "asldijfas>asdfj"
+def test_get_store_by_store_id_invalid_store_id_format(client: TestClient):
+    store_id = "asldijfas>asdfj"
 
-    response = client.get(f"/api/stores/{seller_id}")
+    response = client.get(f"/api/stores/{store_id}")
 
     assert response.status_code == 422
     assert response.json() == {
         "detail": [
             {
-                "loc": ["path", "seller_id"],
+                "loc": ["path", "store_id"],
                 "msg": "value is not a valid uuid",
                 "type": "type_error.uuid"
             }
@@ -57,16 +57,16 @@ def test_get_store_by_seller_id_invalid_seller_id_format(client: TestClient):
     }
 
 
-def test_get_store_by_seller_id_seller_id_has_strip_whitespaces(client: TestClient):
-    seller_id = " 0df1dacb-67f6-495c-b993-49d06a293765 "
+def test_get_store_by_store_id_store_id_has_strip_whitespaces(client: TestClient):
+    store_id = " 0df1dacb-67f6-495c-b993-49d06a293765 "
 
-    response = client.get(f"/api/stores/{seller_id}")
+    response = client.get(f"/api/stores/{store_id}")
 
     assert response.status_code == 422
     assert response.json() == {
         "detail": [
             {
-                "loc": ["path", "seller_id"],
+                "loc": ["path", "store_id"],
                 "msg": "value is not a valid uuid",
                 "type": "type_error.uuid"
             }
@@ -75,7 +75,7 @@ def test_get_store_by_seller_id_seller_id_has_strip_whitespaces(client: TestClie
 
 
 def test_update_store(client: TestClient):
-    seller_id = "0df1dacb-67f6-495c-b993-49d06a293765"
+    store_id = "49b2b69a-512c-4492-a5ea-50633893f8cc"
     json = {
         "name": "NoNutNovember",
         "email": "NNN@gmail.com",
@@ -83,7 +83,7 @@ def test_update_store(client: TestClient):
         "cellphone_number": "0987654321",
         "telephone_number": "02-22542120"
     }
-    response = client.patch(f"/api/stores/{seller_id}", json=json)
+    response = client.patch(f"/api/stores/{store_id}", json=json)
 
     assert response.status_code == 200
     assert response.json() == {
@@ -98,14 +98,14 @@ def test_update_store(client: TestClient):
 
 
 def test_update_store_without_cellphone_number(client: TestClient):
-    seller_id = "0df1dacb-67f6-495c-b993-49d06a293765"
+    store_id = "49b2b69a-512c-4492-a5ea-50633893f8cc"
     json = {
         "name": "NoNutNovember",
         "email": "NNN@gmail.com",
         "address": "SanDiego",
         "telephone_number": "02-22542120",
     }
-    response = client.patch(f"/api/stores/{seller_id}", json=json)
+    response = client.patch(f"/api/stores/{store_id}", json=json)
 
     assert response.status_code == 200
     assert response.json() == {
@@ -120,11 +120,11 @@ def test_update_store_without_cellphone_number(client: TestClient):
 
 
 def test_update_store_with_empty_name(client: TestClient):
-    seller_id = "0df1dacb-67f6-495c-b993-49d06a293765"
+    store_id = "49b2b69a-512c-4492-a5ea-50633893f8cc"
     json = {
         "name": "",
     }
-    response = client.patch(f"/api/stores/{seller_id}", json=json)
+    response = client.patch(f"/api/stores/{store_id}", json=json)
 
     assert response.status_code == 422
     assert response.json() == {
@@ -145,11 +145,11 @@ def test_update_store_with_empty_name(client: TestClient):
 
 
 def test_update_store_with_invalid_email(client: TestClient):
-    seller_id = "0df1dacb-67f6-495c-b993-49d06a293765"
+    store_id = "49b2b69a-512c-4492-a5ea-50633893f8cc"
     json = {
         "email": "NNNgmail.com",
     }
-    response = client.patch(f"/api/stores/{seller_id}", json=json)
+    response = client.patch(f"/api/stores/{store_id}", json=json)
 
     assert response.status_code == 422
     assert response.json() == {
@@ -167,11 +167,11 @@ def test_update_store_with_invalid_email(client: TestClient):
 
 
 def test_update_store_with_invalid_cellphone_number(client: TestClient):
-    seller_id = "0df1dacb-67f6-495c-b993-49d06a293765"
+    store_id = "49b2b69a-512c-4492-a5ea-50633893f8cc"
     json = {
         "cellphone_number": "8888",
     }
-    response = client.patch(f"/api/stores/{seller_id}", json=json)
+    response = client.patch(f"/api/stores/{store_id}", json=json)
 
     assert response.status_code == 422
     assert response.json() == {
@@ -187,11 +187,11 @@ def test_update_store_with_invalid_cellphone_number(client: TestClient):
 
 
 def test_update_store_with_invalid_telephone_number(client: TestClient):
-    seller_id = "0df1dacb-67f6-495c-b993-49d06a293765"
+    store_id = "49b2b69a-512c-4492-a5ea-50633893f8cc"
     json = {
         "telephone_number": "4444",
     }
-    response = client.patch(f"/api/stores/{seller_id}", json=json)
+    response = client.patch(f"/api/stores/{store_id}", json=json)
 
     assert response.status_code == 422
     assert response.json() == {
@@ -206,18 +206,18 @@ def test_update_store_with_invalid_telephone_number(client: TestClient):
     }
 
 
-def test_update_store_with_invalid_seller_id(client: TestClient):
-    seller_id = "qwerasdf"
+def test_update_store_with_invalid_store_id(client: TestClient):
+    store_id = "qwerasdf"
     json = {
         "name": "NoNutNovember",
     }
-    response = client.patch(f"/api/stores/{seller_id}", json=json)
+    response = client.patch(f"/api/stores/{store_id}", json=json)
 
     assert response.status_code == 422
     assert response.json() == {
         "detail": [
             {
-                "loc": ["path", "seller_id"],
+                "loc": ["path", "store_id"],
                 "msg": "value is not a valid uuid",
                 "type": "type_error.uuid"
             }
@@ -225,14 +225,14 @@ def test_update_store_with_invalid_seller_id(client: TestClient):
     }
 
 
-def test_update_store_non_exist_seller(client: TestClient):
-    seller_id = "65761879-19ec-45ac-8d3d-41b477bf134b"
+def test_update_store_non_existing_store(client: TestClient):
+    store_id = "65761879-19ec-45ac-8d3d-41b477bf134b"
     json = {
         "name": "NoNutNovember",
     }
-    response = client.patch(f"/api/stores/{seller_id}", json=json)
+    response = client.patch(f"/api/stores/{store_id}", json=json)
 
     assert response.status_code == 404
     assert response.json() == {
-        "detail": "Seller not found"
+        "detail": "Store not found"
     }
