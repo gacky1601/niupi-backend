@@ -15,6 +15,6 @@ def update_store(database: Session, seller_id: UUID, payload: StoreInitialize):
             .filter(models.Store.seller_id == seller_id) \
             .update(payload.dict(exclude_none=True), synchronize_session="fetch")
 
-    initialized_store = get_store_by_user_id(database, seller_id)
+    updated_store = get_store_by_user_id(database, seller_id)
 
-    return initialized_store
+    return updated_store
