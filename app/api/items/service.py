@@ -1,4 +1,4 @@
-from pydantic import UUID4
+from pydantic import UUID4, conlist
 from sqlalchemy import func
 from sqlalchemy.dialects.postgresql import ARRAY, UUID
 from sqlalchemy.orm import Session
@@ -48,3 +48,28 @@ def update_item(db: Session, item_id: UUID4, payload: ItemUpdate):
 
     updated_item = get_item_by_item_id(db, item_id)
     return updated_item
+
+
+def delete_photos_by_photos_id(
+        database: Session,
+        item_id: UUID4,
+        photos: conlist(UUID4, min_items=1)
+):
+    query = database.query(ItemPhoto).filter(ItemPhoto.id.in_(photos))
+    query.delete(synchronize_session=False)
+    database.commit()
+
+    statement = (
+        f"""
+        SELECT array_agg(id)
+        FROM item_photo
+        WHERE item_id='{item_id}'
+        """
+    )
+
+    restPhotos = database.execute(statement).scalar()
+
+    if restPhotos is None:
+        return []
+
+    return restPhotos
