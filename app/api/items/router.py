@@ -21,7 +21,6 @@ def read_item(item: Item = Depends(validate_item_id)):
 @router.get("/{item_id}/photos", response_model=list[UUID4])
 def read_photos(item: Item = Depends(validate_item_id), db: Session = Depends(get_db)):
     photo_ids = service.get_photos_by_item_id(db, item.id)
-    print(photo_ids)
     return photo_ids
 
 
@@ -48,5 +47,5 @@ def delete_photos(
         db: Session = Depends(get_db)
 ):
 
-    result = service.delete_photos_by_photos_id(db, item.id, photo_ids)
-    return result
+    photo_ids = service.delete_photos(db, item.id, photo_ids)
+    return photo_ids
