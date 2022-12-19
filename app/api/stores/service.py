@@ -6,15 +6,15 @@ from . import models
 from .schemas import StoreUpdate
 
 
-def get_store_by_user_id(database: Session, seller_id: UUID):
-    return database.query(models.Store).filter(models.Store.seller_id == seller_id).first()
+def get_store_by_store_id(database: Session, store_id: UUID):
+    return database.query(models.Store).get(store_id)
 
 
-def update_store(database: Session, seller_id: UUID, payload: StoreUpdate):
+def update_store(database: Session, store_id: UUID, payload: StoreUpdate):
     database.query(models.Store) \
-            .filter(models.Store.seller_id == seller_id) \
+            .filter(models.Store.id == store_id) \
             .update(payload.dict(exclude_none=True), synchronize_session="fetch")
 
-    updated_store = get_store_by_user_id(database, seller_id)
+    updated_store = get_store_by_store_id(database, store_id)
 
     return updated_store
