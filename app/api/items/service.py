@@ -51,12 +51,11 @@ def update_item(db: Session, item_id: UUID4, payload: ItemUpdate):
 
 
 def delete_photos(
-        database: Session,
-        item_id: UUID4,
-        photos: conlist(UUID4, min_items=1)
+    database: Session,
+    item_id: UUID4,
+    photos: conlist(UUID4, min_items=1)
 ):
-    query = database.query(ItemPhoto).filter(ItemPhoto.id.in_(photos))
-    query.delete(synchronize_session=False)
+    database.query(ItemPhoto).filter(ItemPhoto.id.in_(photos)).delete(synchronize_session=False)
     database.commit()
 
     photos = get_photos_by_item_id(database, item_id)
