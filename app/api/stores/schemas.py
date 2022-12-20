@@ -1,4 +1,5 @@
 from typing import Optional
+from uuid import UUID
 
 from pydantic import UUID4, BaseModel, EmailStr, constr
 
@@ -38,3 +39,12 @@ class StoreUpdate(BaseModel):
             regex=telephone_number_regex
         )
     ]
+
+
+class SearchItem(BaseModel):
+    item_id: UUID4
+    store_id: UUID4
+    name: constr(min_length=1, strip_whitespace=True)
+    price: int
+    inventory: int
+    photos: Optional[UUID4]

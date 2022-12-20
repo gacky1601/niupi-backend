@@ -1,5 +1,5 @@
 from uuid import UUID
-
+from typing import Optional
 from sqlalchemy.orm import Session
 
 from . import models
@@ -18,3 +18,19 @@ def update_store(database: Session, store_id: UUID, payload: StoreUpdate):
     updated_store = get_store_by_store_id(database, store_id)
 
     return updated_store
+
+
+def search_item_by_keyword(database: Session, store_id: UUID, keyword: Optional[str]):
+    statement = (
+        f"""
+        SELECT item.*, (array_agg(item_photo.id))[1] as photos, item.id as item_id
+        FROM item
+        LEFT JOIN item_photo
+        ON item.id=item_photo.item_id
+        WHERE item.store_id='{store_id}' AND item.name LIKE '%{keyword}%'
+        GROUP BY item.id
+        """
+    )
+
+    items = database.execute(statement).all()
+    return items
