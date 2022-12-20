@@ -54,7 +54,7 @@ def add_photos(db: Session, item_id: UUID4, photos: conlist(UUID4, min_items=1))
     db.query(Item).filter(Item.id == item_id).first()
 
     new_item_photo = [ItemPhoto(id=photo, item_id=item_id) for photo in photos]
-    db.add_all(new_item_photo)
+    db.bulk_save_objects(new_item_photo)
     db.commit()
 
     photos = get_photos_by_item_id(db, item_id)
