@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pydantic import BaseModel, UUID4, constr
+from pydantic import BaseModel, UUID4, constr, conlist
 
 
 class Item(BaseModel):

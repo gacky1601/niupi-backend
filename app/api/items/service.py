@@ -1,4 +1,4 @@
-from pydantic import UUID4
+from pydantic import UUID4, conlist
 from sqlalchemy import func
 from sqlalchemy.dialects.postgresql import ARRAY, UUID
 from sqlalchemy.orm import Session
@@ -48,3 +48,15 @@ def update_item(db: Session, item_id: UUID4, payload: ItemUpdate):
 
     updated_item = get_item_by_item_id(db, item_id)
     return updated_item
+
+
+def add_photos(db: Session, item_id: UUID4, photos: conlist(UUID4, min_items=1)):
+    db.query(Item).filter(Item.id == item_id).first()
+    
+    for i in range(len(photos)):
+        new_item_photo = ItemPhoto(id = photos[i],item_id = item_id)
+        db.add(new_item_photo)
+        db.commit()
+
+    photos = get_photos_by_item_id(db, item_id)
+    return photos
