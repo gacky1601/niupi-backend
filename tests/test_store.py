@@ -295,6 +295,14 @@ def test_search_item_without_keyword(client: TestClient):
             "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
             "inventory": 50,
             "photos": None
+        },
+        {
+            'inventory': 50,
+            'item_id': '16c9a2d0-2f3d-4730-8e30-d4232366d2c9',
+            'name': 'one',
+            'photos': '2ae40a76-d6af-4a4f-9293-648f8ae74024',
+            'price': 690,
+            'store_id': '49b2b69a-512c-4492-a5ea-50633893f8cc'
         }
     ]
 
