@@ -53,10 +53,9 @@ def update_item(db: Session, item_id: UUID4, payload: ItemUpdate):
 def add_photos(db: Session, item_id: UUID4, photos: conlist(UUID4, min_items=1)):
     db.query(Item).filter(Item.id == item_id).first()
 
-    for i in range(len(photos)):
-        new_item_photo = ItemPhoto(id=photos[i], item_id=item_id)
-        db.add(new_item_photo)
-        db.commit()
+    new_item_photo = [ItemPhoto(id=photo, item_id=item_id) for photo in photos]
+    db.add_all(new_item_photo)
+    db.commit()
 
     photos = get_photos_by_item_id(db, item_id)
     return photos
