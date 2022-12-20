@@ -2,7 +2,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from pydantic import UUID4
+from pydantic import UUID4, conlist
 
 from . import service
 from .dependencies import get_db, validate_item_id
@@ -21,7 +21,6 @@ def read_item(item: Item = Depends(validate_item_id)):
 @router.get("/{item_id}/photos", response_model=list[UUID4])
 def read_photos(item: Item = Depends(validate_item_id), db: Session = Depends(get_db)):
     photo_ids = service.get_photos_by_item_id(db, item.id)
-
     return photo_ids
 
 
@@ -39,3 +38,14 @@ def update_item(
 @router.delete("/{item_id}", status_code=204)
 def delete_item(item: Item = Depends(validate_item_id), db: Session = Depends(get_db)):
     service.delete_item_by_item_id(db, item.id)
+
+
+@router.delete("/{item_id}/photos", response_model=list[UUID])
+def delete_photos(
+    payload: conlist(UUID4, min_items=1),
+    item: Item = Depends(validate_item_id),
+    db: Session = Depends(get_db)
+):
+
+    photo_ids = service.delete_photos(db, item.id, payload)
+    return photo_ids
