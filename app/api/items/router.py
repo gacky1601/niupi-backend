@@ -40,6 +40,7 @@ def update_item(
 def delete_item(item: Item = Depends(validate_item_id), db: Session = Depends(get_db)):
     service.delete_item_by_item_id(db, item.id)
 
+
 @router.post("/{item_id}/photos", response_model=list[UUID])
 def add_photos(
         photo_ids: conlist(UUID4, min_items=1),
