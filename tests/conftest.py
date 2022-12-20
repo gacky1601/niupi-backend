@@ -75,6 +75,31 @@ def initialize_item_test_data(database: Session):
 
     database.add(item)
 
+    item = Item(
+        id="16c9a2d0-2f3d-4730-8e30-d4232366d2c9",
+        name="one",
+        description="photos",
+        price=690,
+        store_id="49b2b69a-512c-4492-a5ea-50633893f8cc",
+        inventory=50
+    )
+
+    database.add(item)
+
+    photo = ItemPhoto(
+        id="2ae40a76-d6af-4a4f-9293-648f8ae74024",
+        item_id="16c9a2d0-2f3d-4730-8e30-d4232366d2c9"
+    )
+
+    database.add(photo)
+
+    photo = ItemPhoto(
+        id="3da32f9c-69b3-448d-b68c-658fc8db91fd",
+        item_id="16c9a2d0-2f3d-4730-8e30-d4232366d2c9"
+    )
+
+    database.add(photo)
+
 
 def initialize_user_test_data(database: Session):
     password = "a".encode("utf-8")
