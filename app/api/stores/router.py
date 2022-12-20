@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from typing import Optional
 
 from . import models, schemas, service
 from .dependencies import get_db, validate_store_id
@@ -31,7 +30,8 @@ def search_store(
     database: Session = Depends(get_db)
 ):
     search_item = service.search_item_by_keyword(database, store.id, keyword)
-    print(type(keyword))
+
     if keyword == "":
         return []
+
     return search_item

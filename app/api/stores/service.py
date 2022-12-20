@@ -1,5 +1,6 @@
-from uuid import UUID
 from typing import Optional
+from uuid import UUID
+
 from sqlalchemy.orm import Session
 
 from . import models
@@ -33,4 +34,5 @@ def search_item_by_keyword(database: Session, store_id: UUID, keyword: Optional[
     )
 
     items = database.execute(statement).all()
+
     return items
