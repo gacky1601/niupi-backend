@@ -51,8 +51,8 @@ def update_item(db: Session, item_id: UUID4, payload: ItemUpdate):
 
 
 def add_photos(db: Session, item_id: UUID4, new_photo_ids: conlist(UUID4, min_items=1)):
-    new_item_photo = [ItemPhoto(id=photo_id, item_id=item_id) for photo_id in new_photo_ids]
-    db.bulk_save_objects(new_item_photo)
+    new_item_photos = [ItemPhoto(id=photo_id, item_id=item_id) for photo_id in new_photo_ids]
+    db.bulk_save_objects(new_item_photos)
     db.commit()
 
     photos = get_photos_by_item_id(db, item_id)

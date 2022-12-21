@@ -42,12 +42,12 @@ def delete_item(item: Item = Depends(validate_item_id), db: Session = Depends(ge
 
 @router.post("/{item_id}/photos", response_model=list[UUID])
 def add_photos(
-    photo_ids: conlist(UUID4, min_items=1),
+    new_photo_ids: conlist(UUID4, min_items=1),
     item: Item = Depends(validate_item_id),
     db: Session = Depends(get_db)
 ):
 
-    photo_ids = service.add_photos(db, item.id, photo_ids)
+    photo_ids = service.add_photos(db, item.id, new_photo_ids)
     return photo_ids
 
 
