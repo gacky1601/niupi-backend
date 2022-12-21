@@ -29,7 +29,7 @@ def initialize_database():
             new_role = Role(id=index, role=role)
             database.add(new_role)
 
-        from .utils.address import initialize_county_table, initialize_district_table
+        from .utils.districts import initialize_county_table, initialize_district_table
 
         initialize_county_table(database)
         initialize_district_table(database)

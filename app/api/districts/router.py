@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.utils.address import districts
+from app.utils.districts import districts
 
 router = APIRouter()
 
