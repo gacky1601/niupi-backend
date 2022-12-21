@@ -3,12 +3,11 @@ from bcrypt import gensalt, hashpw
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from app.main import app
-from app.database import SessionLocal, initialize_database
-
 from app.api.stores.models import Store
 from app.api.user.models import User
 from app.api.items.models import Item, ItemPhoto
+from app.database import SessionLocal, initialize_database
+from app.main import app
 
 
 base_url = "http://127.0.0.1:8000"
