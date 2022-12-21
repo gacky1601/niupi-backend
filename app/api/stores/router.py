@@ -29,9 +29,9 @@ def search_store(
     store: models.Store = Depends(validate_store_id),
     database: Session = Depends(get_db)
 ):
-    items = service.search_items_by_keyword(database, store.id, keyword)
-
     if keyword == "":
         return []
+
+    items = service.search_items_by_keyword(database, store.id, keyword)
 
     return items

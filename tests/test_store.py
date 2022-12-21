@@ -252,7 +252,7 @@ def test_search_item_by_keyword(client: TestClient):
             "price": 500,
             "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
             "inventory": 50,
-            "photos": "c7e7db3b-a097-4fac-81d0-5f999ad33d86"
+            "photo": "c7e7db3b-a097-4fac-81d0-5f999ad33d86"
         },
         {
             "item_id": "16c9a2d0-2f3d-4730-8e30-d4232366d2c4",
@@ -260,7 +260,7 @@ def test_search_item_by_keyword(client: TestClient):
             "price": 690,
             "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
             "inventory": 50,
-            "photos": "a41439ee-d3fb-4f52-b86c-624b659eb092"
+            "photo": "a41439ee-d3fb-4f52-b86c-624b659eb092"
         }
     ]
 
@@ -278,7 +278,7 @@ def test_search_item_without_keyword(client: TestClient):
             "price": 500,
             "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
             "inventory": 50,
-            "photos": "c7e7db3b-a097-4fac-81d0-5f999ad33d86"
+            "photo": "c7e7db3b-a097-4fac-81d0-5f999ad33d86"
         },
         {
             "item_id": "16c9a2d0-2f3d-4730-8e30-d4232366d2c4",
@@ -286,7 +286,7 @@ def test_search_item_without_keyword(client: TestClient):
             "price": 690,
             "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
             "inventory": 50,
-            "photos": "a41439ee-d3fb-4f52-b86c-624b659eb092"
+            "photo": "a41439ee-d3fb-4f52-b86c-624b659eb092"
         },
         {
             "item_id": "16c9a2d0-2f3d-4730-8e30-d4232366d2c8",
@@ -294,13 +294,13 @@ def test_search_item_without_keyword(client: TestClient):
             "price": 690,
             "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
             "inventory": 50,
-            "photos": None
+            "photo": None
         },
         {
             'inventory': 50,
             'item_id': '16c9a2d0-2f3d-4730-8e30-d4232366d2c9',
             'name': 'one',
-            'photos': '2ae40a76-d6af-4a4f-9293-648f8ae74024',
+            'photo': '2ae40a76-d6af-4a4f-9293-648f8ae74024',
             'price': 690,
             'store_id': '49b2b69a-512c-4492-a5ea-50633893f8cc'
         }
