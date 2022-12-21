@@ -24,7 +24,7 @@ def update_store(
 
 
 @router.get("/{store_id}/items", response_model=list[schemas.SearchItem])
-def search_store(
+def search_for_items_in_store(
     keyword: str = "%",
     store: models.Store = Depends(validate_store_id),
     database: Session = Depends(get_db)
