@@ -98,6 +98,7 @@ def test_update_store(client: TestClient):
         "id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
         "seller_id": "0df1dacb-67f6-495c-b993-49d06a293765",
         "name": "NoNutNovember",
+        "email": "NNN@gmail.com",
         "address": {
             "county": "臺北市",
             "district": "中山區",
