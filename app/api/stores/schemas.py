@@ -46,4 +46,4 @@ class SearchItem(BaseModel):
     name: constr(min_length=1, strip_whitespace=True)
     price: int
     inventory: int
-    photos: Optional[UUID4]
+    photo: Optional[UUID4]

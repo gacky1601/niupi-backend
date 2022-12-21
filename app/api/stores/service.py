@@ -21,10 +21,10 @@ def update_store(database: Session, store_id: UUID, payload: StoreUpdate):
     return updated_store
 
 
-def search_item_by_keyword(database: Session, store_id: UUID, keyword: Optional[str]):
+def search_items_by_keyword(database: Session, store_id: UUID, keyword: Optional[str]):
     statement = (
         f"""
-        SELECT item.*, (array_agg(item_photo.id))[1] as photos, item.id as item_id
+        SELECT item.*, (array_agg(item_photo.id))[1] AS photo, item.id AS item_id
         FROM item
         LEFT JOIN item_photo
         ON item.id=item_photo.item_id
