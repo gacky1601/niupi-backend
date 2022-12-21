@@ -15,7 +15,7 @@ def test_get_item_by_item_id(client: TestClient):
         "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
         "inventory": 50,
         "photo_ids": [
-            "002891b5-6019-4144-b174-9aaaf8095063",
+            "c7e7db3b-a097-4fac-81d0-5f999ad33d86",
             "f5832ea6-4c3c-48f0-8bd6-72ebd8754758"
         ]
     }
@@ -97,7 +97,7 @@ def test_update_item(client: TestClient):
         "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
         "inventory": 10,
         "photo_ids": [
-            "002891b5-6019-4144-b174-9aaaf8095063",
+            "c7e7db3b-a097-4fac-81d0-5f999ad33d86",
             "f5832ea6-4c3c-48f0-8bd6-72ebd8754758"
         ]
     }

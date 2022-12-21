@@ -21,3 +21,17 @@ def update_store(
     updated_store = service.update_store(database, store.id, payload)
 
     return updated_store
+
+
+@router.get("/{store_id}/items", response_model=list[schemas.SearchItem])
+def search_for_items_in_store(
+    keyword: str = "%",
+    store: models.Store = Depends(validate_store_id),
+    database: Session = Depends(get_db)
+):
+    if keyword == "":
+        return []
+
+    items = service.search_items_by_keyword(database, store.id, keyword)
+
+    return items
