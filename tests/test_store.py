@@ -113,7 +113,11 @@ def test_update_store_without_cellphone_number(client: TestClient):
     json = {
         "name": "NoNutNovember",
         "email": "NNN@gmail.com",
-        "address": "SanDiego",
+        "address": {
+            "county": "臺北市",
+            "district": "中山區",
+            "detail": "民權東路二段 41 號",
+        },
         "telephone_number": "02-22542120",
     }
     response = client.patch(f"/api/stores/{store_id}", json=json)
@@ -123,7 +127,11 @@ def test_update_store_without_cellphone_number(client: TestClient):
         "id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
         "seller_id": "0df1dacb-67f6-495c-b993-49d06a293765",
         "name": "NoNutNovember",
-        "address": "SanDiego",
+        "address": {
+            "county": "臺北市",
+            "district": "中山區",
+            "detail": "民權東路二段 41 號",
+        },
         "email": "NNN@gmail.com",
         "cellphone_number": "0900000000",
         "telephone_number": "02-22542120",
