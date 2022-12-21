@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 from .districts import districts
-from .models import County, District
+from app.api.districts.models import County, District
 
 
 def initialize_county_table(database: Session):

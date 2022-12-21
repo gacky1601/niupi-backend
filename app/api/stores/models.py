@@ -5,6 +5,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 
 from app.api.items.models import Item
+from app.api.districts.models import County, District
 from app.database import Base
 from app.utils.validator import cellphone_number_regex, email_regex, telephone_number_regex
 
