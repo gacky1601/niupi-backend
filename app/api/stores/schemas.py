@@ -21,7 +21,9 @@ class Store(BaseModel):
 
 class StoreUpdate(BaseModel):
     name: Optional[constr(min_length=1, strip_whitespace=True)]
-    address: Optional[constr(min_length=1, strip_whitespace=True)]
+    county_id: Optional[int]
+    district_id: Optional[int]
+    detail_address: Optional[constr(min_length=1, strip_whitespace=True)]
     email: Optional[EmailStr]
 
     cellphone_number: Optional[
