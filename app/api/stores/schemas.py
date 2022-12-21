@@ -2,8 +2,13 @@ from typing import Optional
 
 from pydantic import UUID4, BaseModel, EmailStr, constr
 
-from app.utils.address import Address
 from app.utils.validator import cellphone_number_regex, telephone_number_regex
+
+
+class Address(BaseModel):
+    county: Optional[constr(min_length=1, strip_whitespace=True)]
+    district: Optional[constr(min_length=1, strip_whitespace=True)]
+    detail: Optional[constr(min_length=1, strip_whitespace=True)]
 
 
 class Store(BaseModel):
