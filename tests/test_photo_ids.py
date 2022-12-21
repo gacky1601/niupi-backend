@@ -42,7 +42,7 @@ def test_add_photos_by_item_id(client: TestClient):
 
     assert response.status_code == 200
     assert response.json() == [
-        "002891b5-6019-4144-b174-9aaaf8095063",
+        "c7e7db3b-a097-4fac-81d0-5f999ad33d86",
         "f5832ea6-4c3c-48f0-8bd6-72ebd8754758",
         "003791b5-6019-4144-b174-9aaaf8095063",
         "004591b5-6019-4144-b174-9aaaf8095063"
