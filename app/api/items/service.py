@@ -57,3 +57,19 @@ def add_photos(db: Session, item_id: UUID4, new_photo_ids: conlist(UUID4, min_it
 
     photos = get_photos_by_item_id(db, item_id)
     return photos
+
+
+def delete_photos(
+    database: Session,
+    item_id: UUID4,
+    payload: conlist(UUID4, min_items=1)
+):
+    database.query(ItemPhoto).filter(ItemPhoto.id.in_(payload)).delete(synchronize_session=False)
+    database.commit()
+
+    photos = get_photos_by_item_id(database, item_id)
+
+    if photos is None:
+        return []
+
+    return photos
