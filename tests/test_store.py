@@ -112,11 +112,9 @@ def test_update_store_without_cellphone_number(client: TestClient):
     json = {
         "name": "NoNutNovember",
         "email": "NNN@gmail.com",
-        "address": {
-            "county": "臺北市",
-            "district": "中山區",
-            "detail": "民權東路二段 41 號",
-        },
+        "county_id": 0,
+        "district_id": 2,
+        "detail_address": "民權東路二段 41 號",
         "telephone_number": "02-22542120",
     }
     response = client.patch(f"/api/stores/{store_id}", json=json)
