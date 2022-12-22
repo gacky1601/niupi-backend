@@ -12,5 +12,5 @@ def validate_item_id(item_id: UUID4, database: Session = Depends(get_db)):
 
     if item is None:
         raise ItemNotFound
-        
+
     return item
