@@ -187,7 +187,9 @@ def test_sign_up(client: TestClient):
     assert data["seller_id"] == user_id
     assert data["name"] is None
     assert data["email"] is None
-    assert data["address"] is None
+    assert data["address"]["county"] is None
+    assert data["address"]["district"] is None
+    assert data["address"]["detail"] is None
     assert data["cellphone_number"] is None
     assert data["telephone_number"] is None
 

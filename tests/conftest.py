@@ -3,12 +3,11 @@ from bcrypt import gensalt, hashpw
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from app.main import app
-from app.database import SessionLocal, initialize_db
-
 from app.api.stores.models import Store
 from app.api.user.models import User
 from app.api.items.models import Item, ItemPhoto
+from app.database import SessionLocal, initialize_database
+from app.main import app
 
 
 base_url = "http://127.0.0.1:8000"
@@ -121,7 +120,9 @@ def initialize_store_test_data(database: Session):
         id="49b2b69a-512c-4492-a5ea-50633893f8cc",
         seller_id="0df1dacb-67f6-495c-b993-49d06a293765",
         name="test",
-        address="test",
+        county_id=0,
+        district_id=2,
+        detail_address="民權東路二段 41 號",
         email="test@gmail.com",
         cellphone_number="0900000000",
         telephone_number="02-22222222"
@@ -132,7 +133,7 @@ def initialize_store_test_data(database: Session):
 
 @pytest.fixture(autouse=True)
 def reset_db():
-    initialize_db()
+    initialize_database()
 
     db = SessionLocal()
 
