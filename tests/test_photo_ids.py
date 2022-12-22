@@ -126,7 +126,7 @@ def test_delete_photos_by_photo_id_item_id_is_empty_string(client: TestClient):
     }
 
 
-def test_delete_photos_id_is_empty_string(client: TestClient):
+def test_delete_photos_id_request_body_is_empty_array(client: TestClient):
     item_id = "16c9a2d0-2f3d-4730-8e30-d4232366d2c9"
 
     json = []
@@ -136,7 +136,7 @@ def test_delete_photos_id_is_empty_string(client: TestClient):
     assert response.status_code == 422
 
 
-def test_delete_photos_ids_not_in_photos(client: TestClient):
+def test_delete_photos_ids_delete_non_existing_photo_id(client: TestClient):
     item_id = "16c9a2d0-2f3d-4730-8e30-d4232366d2c9"
 
     json = ["baf8f19d-60cf-4089-b0c0-467b1d593a88", "0d46d352-a319-4864-9d84-875e0fea5a4d"]
@@ -150,7 +150,7 @@ def test_delete_photos_ids_not_in_photos(client: TestClient):
     ]
 
 
-def test_get_item_after_delete_photo(client: TestClient):
+def test_get_item_after_delete_all_photos(client: TestClient):
     item_id = "16c9a2d0-2f3d-4730-8e30-d4232366d2c9"
 
     json = ["2ae40a76-d6af-4a4f-9293-648f8ae74024", "3da32f9c-69b3-448d-b68c-658fc8db91fd"]
