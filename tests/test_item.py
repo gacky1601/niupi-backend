@@ -204,6 +204,10 @@ def test_delete_item_by_id(client: TestClient):
 
     assert response.status_code == 204
     response = client.get(f"/api/items/{item_id}")
+    assert response.status_code == 404
+    assert response.json() == {
+        "detail": "Item not found"
+    }
 
 
 def test_delete_item_by_empty_item_id_string(client: TestClient):
@@ -241,6 +245,21 @@ def test_delete_item_by_id_without_photo(client: TestClient):
 
     assert response.status_code == 204
     response = client.get(f"/api/items/{item_id}")
+
+    assert response.status_code == 404
+    assert response.json() == {
+        "detail": "Item not found"
+    }
+
+
+def test_get_photos_after_delete_item(client: TestClient):
+    item_id = "16c9a2d0-2f3d-4730-8e30-d4232366d2c4"
+
+    response = client.delete(f"/api/items/{item_id}")
+
+    assert response.status_code == 204
+
+    response = client.get(f"/api/items/{item_id}/photos")
 
     assert response.status_code == 404
     assert response.json() == {
