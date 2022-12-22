@@ -10,7 +10,7 @@ from .schemas import ItemUpdate
 def get_item_by_item_id(database: Session, item_id: UUID4):
     statement = (
         f"""
-        SELECT item.*, array_agg(item_photo.id) as photo_ids
+        SELECT item.*, array_remove(array_agg(item_photo.id), NULL) as photo_ids
         FROM item
         LEFT JOIN item_photo
         ON item.id=item_photo.item_id
