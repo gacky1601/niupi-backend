@@ -251,6 +251,7 @@ def test_delete_item_by_id_without_photo(client: TestClient):
         "detail": "Item not found"
     }
 
+
 def test_get_photos_after_delete_item(client: TestClient):
     item_id = "16c9a2d0-2f3d-4730-8e30-d4232366d2c4"
 
