@@ -7,6 +7,6 @@ from .service import get_county_ids
 router = APIRouter()
 
 
-@router.get("/ids")
+@router.get("")
 def read_county_ids(database: Session = Depends(get_db)):
     return get_county_ids(database)
