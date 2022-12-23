@@ -8,5 +8,5 @@ router = APIRouter()
 
 
 @router.get("")
-def read_county_ids(database: Session = Depends(get_db)):
+def read_counties(database: Session = Depends(get_db)):
     return get_county_ids(database)
