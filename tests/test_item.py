@@ -281,6 +281,7 @@ def test_create_new_item(client: TestClient):
     }
     response = client.post("/api/items", json=json)
     item_id = response.json()["id"]
+
     assert response.json() == {
         "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
         "name": "marker",
@@ -306,6 +307,7 @@ def test_create_new_item_without_photo(client: TestClient):
     }
     response = client.post("/api/items", json=json)
     item_id = response.json()["id"]
+
     assert response.json() == {
         "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
         "name": "marker",
@@ -328,6 +330,7 @@ def test_set_new_item_store_id_not_fuond(client: TestClient):
         "inventory": 50
     }
     response = client.post("/api/items", json=json)
+    
     assert response.json() == {
         "detail": "Cannot add a new item to a store that does not exist"
     }

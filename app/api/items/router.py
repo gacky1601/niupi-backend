@@ -63,8 +63,9 @@ def delete_photos(
 
 
 @router.post("", response_model=Item, status_code=201)
-def creat_item(payload: ItemCreate, db: Session = Depends(get_db)):
+def create_item(payload: ItemCreate, db: Session = Depends(get_db)):
     store = get_store_by_store_id(db, payload.store_id)
+
     if store is None:
         raise StoreNotFound
     new_item = service.creat_new_item(db, payload)
