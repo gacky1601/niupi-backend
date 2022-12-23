@@ -2,7 +2,7 @@ from fastapi.testclient import TestClient
 
 
 def test_get_county_ids(client: TestClient):
-    response = client.get("/api/counties/ids")
+    response = client.get("/api/counties")
 
     assert response.status_code == 200
     assert response.json() == [
