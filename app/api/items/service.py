@@ -75,7 +75,7 @@ def delete_photos(
     return photos
 
 
-def creat_new_item(db: Session, payload: ItemCreate):
+def create_new_item(db: Session, payload: ItemCreate):
     item = Item(
         store_id=payload.store_id,
         name=payload.name,

@@ -68,6 +68,6 @@ def create_item(payload: ItemCreate, db: Session = Depends(get_db)):
 
     if store is None:
         raise StoreNotFound
-    new_item = service.creat_new_item(db, payload)
+    new_item = service.create_new_item(db, payload)
 
     return new_item
