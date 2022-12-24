@@ -330,7 +330,7 @@ def test_set_new_item_store_id_not_fuond(client: TestClient):
         "inventory": 50
     }
     response = client.post("/api/items", json=json)
-    
+
     assert response.json() == {
         "detail": "Cannot add a new item to a store that does not exist"
     }
