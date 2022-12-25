@@ -83,12 +83,13 @@ def create_new_item(db: Session, payload: ItemCreate):
         price=payload.price,
         inventory=payload.inventory,
     )
+    
     db.add(item)
     db.commit()
-    new_item = get_item_by_item_id(db, item.id)
     photos = payload.photo_ids
-    if photos is not None:
-        new_item_photo = [ItemPhoto(id=photo, item_id=new_item.id) for photo in photos]
+
+    if photos:
+        new_item_photo = [ItemPhoto(id=photo, item_id=item.id) for photo in photos]
         db.bulk_save_objects(new_item_photo)
         db.commit()
 
