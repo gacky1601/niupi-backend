@@ -83,7 +83,6 @@ def create_new_item(db: Session, payload: ItemCreate):
         price=payload.price,
         inventory=payload.inventory,
     )
-    
     db.add(item)
     db.commit()
     photos = payload.photo_ids
