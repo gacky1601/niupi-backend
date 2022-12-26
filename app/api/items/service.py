@@ -83,6 +83,7 @@ def create_new_item(db: Session, payload: ItemCreate):
         price=payload.price,
         inventory=payload.inventory,
     )
+
     db.add(item)
     db.commit()
     photos = payload.photo_ids
@@ -90,7 +91,6 @@ def create_new_item(db: Session, payload: ItemCreate):
     if photos:
         new_item_photo = [ItemPhoto(id=photo, item_id=item.id) for photo in photos]
         db.bulk_save_objects(new_item_photo)
-        db.commit()
 
     new_item = get_item_by_item_id(db, item.id)
     return new_item
