@@ -33,6 +33,7 @@ class Orders(Base):
         Integer,
         nullable=False
     )
+
     create_at = Column(TIMESTAMP, nullable=False)
     paid_at = Column(TIMESTAMP)
     shipped_at = Column(TIMESTAMP)

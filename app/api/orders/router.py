@@ -16,4 +16,5 @@ def read_order(order_id: str, db: Session = Depends(get_db)):
 
     if order is None:
         raise OrderNotFound
+
     return order
