@@ -74,7 +74,7 @@ def test_get_user_by_id_id_has_strip_whitespaces(client: TestClient):
 
 
 def test_get_users(client: TestClient):
-    response = client.get("/api/users/")
+    response = client.get("/api/users")
     assert response.status_code == 200
     assert response.json() == [
         {
