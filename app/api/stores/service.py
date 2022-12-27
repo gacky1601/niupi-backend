@@ -36,6 +36,8 @@ def update_store(database: Session, store_id: UUID, payload: StoreUpdate):
             .filter(models.Store.id == store_id) \
             .update(payload.dict(exclude_none=True), synchronize_session="fetch")
 
+    database.commit()
+
     updated_store = get_store_by_store_id(database, store_id)
 
     return updated_store
