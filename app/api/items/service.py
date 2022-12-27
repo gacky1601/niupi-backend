@@ -86,6 +86,7 @@ def create_new_item(db: Session, payload: ItemCreate):
 
     db.add(item)
     db.commit()
+
     photos = payload.photo_ids
 
     if photos:
