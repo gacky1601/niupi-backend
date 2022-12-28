@@ -3,6 +3,7 @@ from bcrypt import gensalt, hashpw
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
+from app.api.carts.models import Cart
 from app.api.stores.models import Store
 from app.api.user.models import User
 from app.api.items.models import Item, ItemPhoto
@@ -115,6 +116,26 @@ def initialize_user_test_data(database: Session):
     database.add(user)
 
 
+def initialize_cart_test_data(database: Session):
+    cart = Cart(
+        user_id="0df1dacb-67f6-495c-b993-49d06a293765",
+        item_id="16c9a2d0-2f3d-4730-8e30-d4232366d2c9",
+        updated_at='2022-12-28T14:42:56.801516+08:00',
+        quantity=1
+    )
+
+    database.add(cart)
+
+    cart = Cart(
+        user_id="0df1dacb-67f6-495c-b993-49d06a293765",
+        item_id="0df1dacb-67f6-495c-b993-49d06a293787",
+        updated_at='2022-12-28T14:50:37.356343+08:00',
+        quantity=2
+    )
+
+    database.add(cart)
+
+
 def initialize_store_test_data(database: Session):
     store = Store(
         id="49b2b69a-512c-4492-a5ea-50633893f8cc",
@@ -139,6 +160,7 @@ def reset_db():
 
     initialize_user_test_data(db)
     initialize_store_test_data(db)
+    initialize_cart_test_data(db)
 
     user1 = User(
         id="66761879-19ec-45ac-8d3d-41b477bf134b",
