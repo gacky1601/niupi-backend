@@ -21,3 +21,15 @@ class ItemUpdate(BaseModel):
     description: Optional[constr(min_length=1, strip_whitespace=True)]
     price: int
     inventory: int
+
+
+class ItemCreate(BaseModel):
+    store_id: UUID4
+    name: constr(min_length=1, strip_whitespace=True)
+    description: Optional[constr(min_length=1, strip_whitespace=True)]
+    price: int
+    inventory: int
+    photo_ids: Optional[list[UUID4]]
+
+    class Config:
+        orm_mode = True

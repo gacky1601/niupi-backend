@@ -13,3 +13,4 @@ if config.ENV == Environment.PRODUCTION:
 app = FastAPI(**app_configs)
 
 app.include_router(api.router, prefix="/api")
+app.router.redirect_slashes = False
