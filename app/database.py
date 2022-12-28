@@ -12,14 +12,14 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 
-def initialize_db():
+def initialize_database():
     if config.ENV == Environment.DEVELOPMENT:
         Base.metadata.drop_all(engine)
 
     Base.metadata.create_all(bind=engine)
 
     if config.ENV == Environment.DEVELOPMENT:
-        db = SessionLocal()
+        database = SessionLocal()
 
         # initialize role table
         from .api.user.models import Role
@@ -27,8 +27,13 @@ def initialize_db():
         roles = ["admin", "user"]
         for index, role in enumerate(roles):
             new_role = Role(id=index, role=role)
-            db.add(new_role)
+            database.add(new_role)
 
-        db.commit()
+        from .utils.districts import initialize_county_table, initialize_district_table
 
-        db.close()
+        initialize_county_table(database)
+        initialize_district_table(database)
+
+        database.commit()
+
+        database.close()

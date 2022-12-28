@@ -204,6 +204,10 @@ def test_delete_item_by_id(client: TestClient):
 
     assert response.status_code == 204
     response = client.get(f"/api/items/{item_id}")
+    assert response.status_code == 404
+    assert response.json() == {
+        "detail": "Item not found"
+    }
 
 
 def test_delete_item_by_empty_item_id_string(client: TestClient):
@@ -246,3 +250,88 @@ def test_delete_item_by_id_without_photo(client: TestClient):
     assert response.json() == {
         "detail": "Item not found"
     }
+
+
+def test_get_photos_after_delete_item(client: TestClient):
+    item_id = "16c9a2d0-2f3d-4730-8e30-d4232366d2c4"
+
+    response = client.delete(f"/api/items/{item_id}")
+
+    assert response.status_code == 204
+
+    response = client.get(f"/api/items/{item_id}/photos")
+
+    assert response.status_code == 404
+    assert response.json() == {
+        "detail": "Item not found"
+    }
+
+
+def test_create_new_item(client: TestClient):
+    json = {
+        "name": "marker",
+        "description": "so many water",
+        "price": 500,
+        "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
+        "inventory": 50,
+        "photo_ids": [
+            "56cef54e-78c1-4c4d-9f4f-44ebcad5bcfa",
+            "da27353b-b024-4c1c-bf3a-91c48f0698f4"
+        ]
+    }
+    response = client.post("/api/items", json=json)
+    item_id = response.json()["id"]
+
+    assert response.json() == {
+        "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
+        "name": "marker",
+        "description": "so many water",
+        "price": 500,
+        "inventory": 50,
+        "id": item_id,
+        'photo_ids': [
+            "56cef54e-78c1-4c4d-9f4f-44ebcad5bcfa",
+            "da27353b-b024-4c1c-bf3a-91c48f0698f4"
+        ]
+    }
+    assert response.status_code == 201
+
+
+def test_create_new_item_without_photo(client: TestClient):
+    json = {
+        "name": "marker",
+        "description": "so many water",
+        "price": 500,
+        "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
+        "inventory": 50,
+    }
+    response = client.post("/api/items", json=json)
+    item_id = response.json()["id"]
+
+    assert response.json() == {
+        "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
+        "name": "marker",
+        "description": "so many water",
+        "price": 500,
+        "inventory": 50,
+        "id": item_id,
+        'photo_ids': []
+    }
+    assert response.status_code == 201
+
+
+def test_set_new_item_store_id_not_fuond(client: TestClient):
+
+    json = {
+        "name": "marker",
+        "description": "so many water",
+        "price": 500,
+        "store_id": "98A7A34B-CBBD-4517-B514-0ACC2B631C22",
+        "inventory": 50
+    }
+    response = client.post("/api/items", json=json)
+
+    assert response.json() == {
+        "detail": "Cannot add a new item to a store that does not exist"
+    }
+    assert response.status_code == 400

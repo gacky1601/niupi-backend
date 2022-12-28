@@ -8,13 +8,35 @@ from .schemas import StoreUpdate
 
 
 def get_store_by_store_id(database: Session, store_id: UUID):
-    return database.query(models.Store).get(store_id)
+    address_json_object = (
+        """
+        json_build_object(
+            'county', county.name,
+            'district', district.name,
+            'detail', store.detail_address
+        ) AS address
+        """
+    )
+
+    statement = (
+        f"""
+        SELECT store.*, {address_json_object}
+        FROM store
+        LEFT JOIN county ON county.id=store.county_id
+        LEFT JOIN district ON district.id=store.district_id
+        WHERE store.id='{store_id}'
+        """
+    )
+
+    return database.execute(statement).first()
 
 
 def update_store(database: Session, store_id: UUID, payload: StoreUpdate):
     database.query(models.Store) \
             .filter(models.Store.id == store_id) \
             .update(payload.dict(exclude_none=True), synchronize_session="fetch")
+
+    database.commit()
 
     updated_store = get_store_by_store_id(database, store_id)
 
