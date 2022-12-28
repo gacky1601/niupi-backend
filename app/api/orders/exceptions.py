@@ -5,6 +5,7 @@ OrderNotFound = HTTPException(
     detail="Order not found"
 )
 
+
 OrderIdInvalidFormat = HTTPException(
     status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
     detail=[
