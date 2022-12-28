@@ -4,6 +4,7 @@ from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 
+from app.api.carts.models import Cart
 from app.database import Base
 
 
@@ -31,6 +32,7 @@ class Item(Base):
     inventory = Column(Integer, nullable=False)
 
     photos = relationship("ItemPhoto", backref="item")
+    cart = relationship("Cart", backref="cart_item")
 
 
 class ItemPhoto(Base):
