@@ -1,12 +1,9 @@
 from sqlalchemy import Column, Integer, ForeignKey, DateTime
-from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy import CheckConstraint
-import uuid
 
-from app.database import Base
 from sqlalchemy.sql import func
-# from app.api.store.models import Store
+from app.database import Base
+
 
 
 class Cart(Base):
@@ -25,5 +22,5 @@ class Cart(Base):
         nullable=False,
         primary_key=True
     )
-    updated_at = Column(DateTime(timezone=True), default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=False), default=func.now(), nullable=False)
     quantity = Column(Integer, nullable=False)
