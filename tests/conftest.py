@@ -120,7 +120,7 @@ def initialize_cart_test_data(database: Session):
     cart = Cart(
         user_id="0df1dacb-67f6-495c-b993-49d06a293765",
         item_id="16c9a2d0-2f3d-4730-8e30-d4232366d2c9",
-        updated_at='2022-12-28T14:42:56.801516+08:00',
+        updated_at='2022-12-28T20:01:16.844201',
         quantity=1
     )
 
@@ -129,7 +129,7 @@ def initialize_cart_test_data(database: Session):
     cart = Cart(
         user_id="0df1dacb-67f6-495c-b993-49d06a293765",
         item_id="0df1dacb-67f6-495c-b993-49d06a293787",
-        updated_at='2022-12-28T14:50:37.356343+08:00',
+        updated_at='2022-12-28T20:02:10.054216',
         quantity=2
     )
 

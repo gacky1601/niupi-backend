@@ -14,12 +14,12 @@ def test_get_cart(client: TestClient):
     assert data[0]['items'][1]['price'] == 500
     assert data[0]['items'][1]['photo_id'] == 'c7e7db3b-a097-4fac-81d0-5f999ad33d86'
     assert data[0]['items'][1]['quantity'] == 2
-    assert data[0]['items'][1]['updated_at'] == '2022-12-28T14:50:37.356343+08:00'
+    assert data[0]['items'][1]['updated_at'] == '2022-12-28T20:02:10.054216'
     assert data[0]['items'][0]['name'] == 'one'
     assert data[0]['items'][0]['price'] == 690
     assert data[0]['items'][0]['photo_id'] == '2ae40a76-d6af-4a4f-9293-648f8ae74024'
     assert data[0]['items'][0]['quantity'] == 1
-    assert data[0]['items'][0]['updated_at'] == '2022-12-28T14:42:56.801516+08:00'
+    assert data[0]['items'][0]['updated_at'] == '2022-12-28T20:01:16.844201'
 
 
 def test_get_cart_not_exist_user(client: TestClient):
