@@ -1,14 +1,19 @@
-from sqlalchemy import Column, DateTime, Integer, ForeignKey, String, TIMESTAMP, BOOLEAN
+from sqlalchemy import CheckConstraint, Column, Integer, ForeignKey, String, TIMESTAMP, BOOLEAN
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
 
 from app.database import Base
 from app.utils.validator import order_id_regex
-from sqlalchemy.sql import func
 
 
 class Orders(Base):
     __tablename__ = "orders"
+
+    __table_args__ = (
+        CheckConstraint(
+            f"id ~* '{order_id_regex}'", name="order_id_check"
+        ),
+    )
 
     id = Column(
         String,

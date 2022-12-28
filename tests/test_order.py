@@ -33,6 +33,23 @@ def test_get_order_by_order_id(client: TestClient):
     }
 
 
+def test_get_order_by_order_id_invalid_order_id_format(client: TestClient):
+    order_id = "AAAAAAAAAA2222"
+
+    response = client.get(f"/api/orders/{order_id}")
+
+    assert response.status_code == 422
+    print(response.json())
+    assert response.json() == {
+        "detail": [
+            {
+                "loc": ["path", "order_id"],
+                "msg": "value is not a valid format",
+                "type": "type_error.uuid"
+            }
+        ]
+    }
+
 def test_get_order_by_order_id_order_id_not_found(client: TestClient):
     order_id = "20221225ED43w2"
 
