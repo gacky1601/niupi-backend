@@ -14,9 +14,9 @@ class Orders(BaseModel):
     store_id: UUID4
     store_name: constr(min_length=1, strip_whitespace=True)
     items: list[OrderItem]
-    recipient: constr
-    recipient_telephone_number: constr
-    address: constr
+    recipient: constr(min_length=1, strip_whitespace=True)
+    recipient_telephone_number: constr(min_length=1, strip_whitespace=True)
+    address: constr(min_length=1, strip_whitespace=True)
     sub_total: int
     shipping_fee: int
     total_amount: int

@@ -43,9 +43,10 @@ def test_get_order_by_order_id_invalid_order_id_format(client: TestClient):
     assert response.json() == {
         "detail": [
             {
+                "ctx": {"pattern": '^[2-9][0-9]{7}[0-9a-zA-Z]{6}$'},
                 "loc": ["path", "order_id"],
-                "msg": "value is not a valid format",
-                "type": "type_error.uuid"
+                "msg": 'string does not match regex "^[2-9][0-9]{7}[0-9a-zA-Z]{6}$"',
+                "type": "value_error.str.regex"
             }
         ]
     }
