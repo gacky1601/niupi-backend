@@ -1,12 +1,12 @@
 from uuid import UUID
 
 from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
 from pydantic import UUID4
-from .schemas import Cart
+from sqlalchemy.orm import Session
 from . import service
 from .dependencies import get_db
 from .exceptions import UserNotFound
+from .schemas import Cart
 
 
 router = APIRouter()

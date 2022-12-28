@@ -1,8 +1,8 @@
 from typing import Optional
 
 import datetime
-from pydantic import BaseModel, UUID4, constr
 from fastapi import HTTPException, status
+from pydantic import BaseModel, UUID4, constr
 
 
 class CartItem(BaseModel):
