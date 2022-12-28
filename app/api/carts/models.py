@@ -5,7 +5,6 @@ from sqlalchemy.sql import func
 from app.database import Base
 
 
-
 class Cart(Base):
     __tablename__ = "cart"
 
