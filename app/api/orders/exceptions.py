@@ -6,7 +6,7 @@ OrderNotFound = HTTPException(
 )
 
 OrderIdInvalidFormat = HTTPException(
-    status_code= status.HTTP_422_UNPROCESSABLE_ENTITY,
+    status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
     detail=[
         {
             "loc": ["path", "order_id"],
