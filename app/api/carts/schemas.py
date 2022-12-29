@@ -1,6 +1,6 @@
 from typing import Optional
-
 import datetime
+
 from fastapi import HTTPException, status
 from pydantic import BaseModel, UUID4, constr
 
