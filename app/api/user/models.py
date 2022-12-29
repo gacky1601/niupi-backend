@@ -44,3 +44,5 @@ class User(Base):
         cascade="all, delete",
         passive_deletes=True
     )
+
+    orders = relationship("Order")

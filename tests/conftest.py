@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from app.api.stores.models import Store
 from app.api.user.models import User
 from app.api.items.models import Item, ItemPhoto
+from app.api.orders.models import Order, OrderItem
 from app.database import SessionLocal, initialize_database
 from app.main import app
 
@@ -16,6 +17,39 @@ base_url = "http://127.0.0.1:8000"
 @pytest.fixture
 def client():
     return TestClient(app, base_url)
+
+
+def initialize_order_test_data(database: Session):
+    order = Order(
+        id="20221212ED43w2",
+        user_id="66761879-19ec-45ac-8d3d-41b477bf134b",
+        store_id="49b2b69a-512c-4492-a5ea-50633893f8cc",
+        shipping_fee=20,
+        create_at="2022-11-29",
+        paid_at="2022-11-29",
+        shipped_at="2022-11-29",
+        received_at="2022-11-29",
+        reviewed_at="2022-11-29",
+        is_cancelled=False
+    )
+
+    database.add(order)
+
+    order_item = OrderItem(
+        item_id="0df1dacb-67f6-495c-b993-49d06a293787",
+        quantity=5,
+        order_id="20221212ED43w2"
+    )
+
+    database.add(order_item)
+
+    order_item = OrderItem(
+        item_id="16c9a2d0-2f3d-4730-8e30-d4232366d2c4",
+        quantity=10,
+        order_id="20221212ED43w2"
+    )
+
+    database.add(order_item)
 
 
 def initialize_item_test_data(database: Session):
@@ -114,6 +148,17 @@ def initialize_user_test_data(database: Session):
 
     database.add(user)
 
+    user = User(
+        id="66761879-19ec-45ac-8d3d-41b477bf134b",
+        email="ahuhwr886128@gmail.com",
+        username="liang",
+        hashed_password="b",
+        role_id=0,
+        address="台北市大安區建國南路一段5號82樓"
+    )
+
+    database.add(user)
+
 
 def initialize_store_test_data(database: Session):
     store = Store(
@@ -140,17 +185,9 @@ def reset_db():
     initialize_user_test_data(db)
     initialize_store_test_data(db)
 
-    user1 = User(
-        id="66761879-19ec-45ac-8d3d-41b477bf134b",
-        email="ahuhwr886128@gmail.com",
-        username="liang",
-        hashed_password="b",
-        role_id=0
-    )
-
-    db.add(user1)
-
     initialize_item_test_data(db)
+
+    initialize_order_test_data(db)
 
     db.commit()
     db.close()
