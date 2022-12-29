@@ -45,4 +45,5 @@ class User(Base):
         passive_deletes=True
     )
 
+    cart = relationship("Cart", backref="cart_user")
     orders = relationship("Order")

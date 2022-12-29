@@ -31,6 +31,7 @@ class Item(Base):
     inventory = Column(Integer, nullable=False)
 
     photos = relationship("ItemPhoto", backref="item")
+    cart = relationship("Cart", backref="cart_item")
     order_items = relationship("OrderItem")
 
 
