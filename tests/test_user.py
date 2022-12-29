@@ -89,7 +89,7 @@ def test_get_users(client: TestClient):
             "id": "66761879-19ec-45ac-8d3d-41b477bf134b",
             "email": "ahuhwr886128@gmail.com",
             "username": "liang",
-            "address": None,
+            "address": "台北市大安區建國南路一段5號82樓",
             "cellphone_number": None,
             "role_id": 0
         }

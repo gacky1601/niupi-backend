@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from app.api.stores.models import Store
 from app.api.user.models import User
 from app.api.items.models import Item, ItemPhoto
-from app.api.orders.models import Orders, OrderItem
+from app.api.orders.models import Order, OrderItem
 from app.database import SessionLocal, initialize_database
 from app.main import app
 
@@ -20,7 +20,7 @@ def client():
 
 
 def initialize_order_test_data(database: Session):
-    order = Orders(
+    order = Order(
         id="20221212ED43w2",
         user_id="66761879-19ec-45ac-8d3d-41b477bf134b",
         store_id="49b2b69a-512c-4492-a5ea-50633893f8cc",
@@ -148,6 +148,17 @@ def initialize_user_test_data(database: Session):
 
     database.add(user)
 
+    user = User(
+        id="66761879-19ec-45ac-8d3d-41b477bf134b",
+        email="ahuhwr886128@gmail.com",
+        username="liang",
+        hashed_password="b",
+        role_id=0,
+        address="台北市大安區建國南路一段5號82樓"
+    )
+
+    database.add(user)
+
 
 def initialize_store_test_data(database: Session):
     store = Store(
@@ -173,16 +184,6 @@ def reset_db():
 
     initialize_user_test_data(db)
     initialize_store_test_data(db)
-
-    user1 = User(
-        id="66761879-19ec-45ac-8d3d-41b477bf134b",
-        email="ahuhwr886128@gmail.com",
-        username="liang",
-        hashed_password="b",
-        role_id=0
-    )
-
-    db.add(user1)
 
     initialize_item_test_data(db)
 

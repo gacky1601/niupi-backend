@@ -6,7 +6,7 @@ from app.database import Base
 from app.utils.validator import order_id_regex
 
 
-class Orders(Base):
+class Order(Base):
     __tablename__ = "orders"
 
     __table_args__ = (
@@ -51,7 +51,7 @@ class Orders(Base):
         nullable=False
     )
 
-    items = relationship("OrderItem", backref="Orders")
+    items = relationship("OrderItem", backref="Order")
 
 
 class OrderItem(Base):

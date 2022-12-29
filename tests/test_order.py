@@ -8,7 +8,7 @@ def test_get_order_by_order_id(client: TestClient):
 
     assert response.status_code == 200
     assert response.json() == {
-        'address': None,
+        'address': "台北市大安區建國南路一段5號82樓",
         'items': [
             {
                 'name': 'pain_marker',

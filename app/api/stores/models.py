@@ -47,4 +47,4 @@ class Store(Base):
 
     items = relationship("Item")
 
-    orders = relationship("Orders")
+    orders = relationship("Order")

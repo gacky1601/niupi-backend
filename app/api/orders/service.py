@@ -3,7 +3,7 @@ from sqlalchemy import func
 from sqlalchemy.dialects.postgresql import ARRAY, UUID
 from sqlalchemy.orm import Session
 
-from .models import Orders, OrderItem
+from .models import Order, OrderItem
 
 
 def get_order_by_order_id(database: Session, order_id: str):

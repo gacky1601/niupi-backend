@@ -45,4 +45,4 @@ class User(Base):
         passive_deletes=True
     )
 
-    orders = relationship("Orders")
+    orders = relationship("Order")
