@@ -4,7 +4,6 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy import CheckConstraint
 import uuid
 
-from app.api.carts.models import Cart
 from app.api.stores.models import Store
 from app.database import Base
 from app.utils.validator import cellphone_number_regex, email_regex
