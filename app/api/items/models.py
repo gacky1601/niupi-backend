@@ -32,6 +32,7 @@ class Item(Base):
 
     photos = relationship("ItemPhoto", backref="item")
     cart = relationship("Cart", backref="cart_item")
+    order_items = relationship("OrderItem")
 
 
 class ItemPhoto(Base):

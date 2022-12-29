@@ -46,3 +46,5 @@ class Store(Base):
     seller = relationship("User", back_populates="store", cascade_backrefs=True)
 
     items = relationship("Item")
+
+    orders = relationship("Order")

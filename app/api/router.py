@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from . import user, stores, auth, users, items, districts, counties, carts
+from . import user, stores, auth, users, items, districts, counties, carts, orders
 
 
 api_router = APIRouter()
@@ -13,3 +13,4 @@ api_router.include_router(items.router, prefix="/items")
 api_router.include_router(carts.router, prefix="/carts")
 api_router.include_router(counties.router, prefix="/counties")
 api_router.include_router(districts.router, prefix="/districts")
+api_router.include_router(orders.router, prefix="/orders")

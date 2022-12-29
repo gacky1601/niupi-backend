@@ -46,3 +46,4 @@ class User(Base):
     )
 
     cart = relationship("Cart", backref="cart_user")
+    orders = relationship("Order")
