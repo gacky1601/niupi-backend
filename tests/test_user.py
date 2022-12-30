@@ -182,6 +182,18 @@ def test_update_user_by_id(client: TestClient):
     }
     assert response.status_code == 200
 
+    response = client.get(f"/api/user/{user_id}")
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "id": "0df1dacb-67f6-495c-b993-49d06a293765",
+        "email": "update@gmail.com",
+        "username": "update",
+        "address": None,
+        "cellphone_number": None,
+        "role_id": 0,
+    }
+
 
 def test_update_user_not_exist_user(client: TestClient):
     user_id = "65761879-19ec-45ac-8d3d-41b477bf134b"
