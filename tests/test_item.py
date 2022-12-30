@@ -120,7 +120,6 @@ def test_update_item(client: TestClient):
     }
 
 
-
 def test_update_item_not_exist_item(client: TestClient):
     item_id = "65761879-19ec-45ac-8d3d-41b477bf134b"
     json = {
