@@ -94,6 +94,11 @@ def test_delete_photos_by_photo_id(client: TestClient):
     assert response.status_code == 200
     assert response.json() == ["3da32f9c-69b3-448d-b68c-658fc8db91fd"]
 
+    response = client.get(f"/api/items/{item_id}/photos")
+
+    assert response.status_code == 200
+    assert response.json() == ["3da32f9c-69b3-448d-b68c-658fc8db91fd"]
+
 
 def test_delete_photos_by_photo_id_item_not_exist(client: TestClient):
     item_id = "0df1dacb-67f6-495c-b993-49d06a293789"
