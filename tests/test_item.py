@@ -298,6 +298,7 @@ def test_create_new_item(client: TestClient):
     response = client.post("/api/items", json=json)
     item_id = response.json()["id"]
 
+    assert response.status_code == 201
     assert response.json() == {
         "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
         "name": "marker",
@@ -310,7 +311,23 @@ def test_create_new_item(client: TestClient):
             "da27353b-b024-4c1c-bf3a-91c48f0698f4"
         ]
     }
-    assert response.status_code == 201
+
+    response = client.get(f"/api/items/{item_id}")
+
+    assert response.status_code == 200
+
+    assert response.json() == {
+        "store_id": "49b2b69a-512c-4492-a5ea-50633893f8cc",
+        "name": "marker",
+        "description": "so many water",
+        "price": 500,
+        "inventory": 50,
+        "id": item_id,
+        'photo_ids': [
+            "56cef54e-78c1-4c4d-9f4f-44ebcad5bcfa",
+            "da27353b-b024-4c1c-bf3a-91c48f0698f4"
+        ]
+    }
 
 
 def test_create_new_item_without_photo(client: TestClient):
