@@ -28,7 +28,7 @@ def create_user(db: Session, user: schemas.UserCreate):
         email=user.email,
         username=user.username,
         hashed_password=hashed_password,
-        role_id=0,
+        role_id=1,
     )
 
     new_store = Store(
