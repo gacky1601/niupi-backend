@@ -89,7 +89,7 @@ def test_sign_up_email_has_strip_whitespaces(client: TestClient):
     assert data["username"] == "yu"
     assert data["address"] is None
     assert data["cellphone_number"] is None
-    assert data["role_id"] == 0
+    assert data["role_id"] == 1
     assert "hashed_password" not in data
     assert "id" in data
     user_id = data["id"]
@@ -101,7 +101,7 @@ def test_sign_up_email_has_strip_whitespaces(client: TestClient):
     assert data["username"] == "yu"
     assert data["address"] is None
     assert data["cellphone_number"] is None
-    assert data["role_id"] == 0
+    assert data["role_id"] == 1
     assert "hashed_password" not in data
     assert data["id"] == user_id
 
@@ -122,7 +122,7 @@ def test_sign_up_username_has_strip_whitespaces(client: TestClient):
     assert data["username"] == "yu"
     assert data["address"] is None
     assert data["cellphone_number"] is None
-    assert data["role_id"] == 0
+    assert data["role_id"] == 1
     assert "hashed_password" not in data
     assert "id" in data
     user_id = data["id"]
@@ -134,7 +134,7 @@ def test_sign_up_username_has_strip_whitespaces(client: TestClient):
     assert data["username"] == "yu"
     assert data["address"] is None
     assert data["cellphone_number"] is None
-    assert data["role_id"] == 0
+    assert data["role_id"] == 1
     assert "hashed_password" not in data
     assert data["id"] == user_id
 
@@ -155,7 +155,7 @@ def test_sign_up(client: TestClient):
     assert data["username"] == "yu"
     assert data["address"] is None
     assert data["cellphone_number"] is None
-    assert data["role_id"] == 0
+    assert data["role_id"] == 1
     assert "hashed_password" not in data
     assert "id" in data
     user_id = data["id"]
@@ -175,7 +175,7 @@ def test_sign_up(client: TestClient):
     assert data["username"] == "yu"
     assert data["address"] is None
     assert data["cellphone_number"] is None
-    assert data["role_id"] == 0
+    assert data["role_id"] == 1
     assert "store_id" in data
     store_id = data["store_id"]
     assert "hashed_password" not in data
