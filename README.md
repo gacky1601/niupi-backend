@@ -1,20 +1,22 @@
 # 牛啤購物後端
 
-## 開發規則與流程
-
-- [開發規則](https://github.com/gacky1601/niupi-backend/wiki/%E9%96%8B%E7%99%BC%E8%A6%8F%E5%89%87)
-- [開發流程](https://github.com/gacky1601/niupi-backend/wiki/%E9%96%8B%E7%99%BC%E6%B5%81%E7%A8%8B)
-
 ## 環境設定
 
 1. 請先安裝 [pipenv](https://github.com/pypa/pipenv#installation)
-2. 在專案目錄下開啟終端機並輸入
+2. 安裝 [PostgreSQL](https://www.postgresql.org/download/)
+3. 新增一個名為 niupi 的資料庫
+4. 在專案目錄下新增一個 `.env` 檔，並在 `.env` 檔輸入以下內容（{} 不用打）
+```env
+ENV="development"
+POSTGRESS_ADDRESS = "postgresql://{你的使用者名稱}@localhost:{運行 PostgreSQL 的 port，預設是 5432}/niupi"
+```
+5. 在專案目錄下開啟終端機並輸入
 ```bash
 pipenv install --dev
 ```
 
-3. 在專案目錄下新增 `.vscode` 目錄
-4. 在 `.vscode` 目錄新增 `settings.json`，並貼上以下內容
+6. 在專案目錄下新增 `.vscode` 目錄
+7. 在 `.vscode` 目錄新增 `settings.json`，並貼上以下內容
 ```json
 {
     "python.linting.flake8Enabled": true,
